@@ -19,7 +19,7 @@ export default function PDFDownloadButton({ text, fileName, bgImage }) {
     <button
       className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-2"
       onClick={downloadPDF}
-    >
+    > 
       Download {fileName}
     </button>
   );
