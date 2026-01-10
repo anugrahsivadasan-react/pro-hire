@@ -9,21 +9,21 @@ const Dashboard = () => {
   
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-white via-violet-100 to-violet-200 text-gray-900 font-sans relative">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#ADD2DB] via-white to-[#6FAEC0] text-gray-900 font-sans relative">
       
      
 
       {/* Welcome Section */}
       <section className="flex flex-col items-start justify-center px-6 md:px-20 py-20 space-y-6 min-h-[80vh]">
         <h2 className="text-4xl md:text-6xl font-black leading-tight text-gray-900 drop-shadow-sm">
-          Welcome to <br /> Ziya Academy  <span className="text-violet-700">{user?.name || 'Employee'}</span>!
+          Welcome to <br /> Pro-Hire  <span className="text-[#71AEC1]">{user?.name || 'Ziya Academy'}</span>!
         </h2>
         <p className="text-xl md:text-2xl text-gray-700 font-medium">
           Glad to have you as our employee!!!
         </p>
         <button
           onClick={() => navigate('/home')}
-          className="bg-violet-700 hover:bg-violet-800 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300"
+          className="bg-[#7EB7C8] hover:bg-[#71AEC1] text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300"
         >
           Generate letters
         </button>
