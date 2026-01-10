@@ -10,7 +10,7 @@ import {
   generateOfferLetter,
   generateIncrementLetter,
 } from "./templates/appointmentLetter";
-import bgImage from "./assets/bg.png";
+import bgImage from "./assets/slamslogo.jpeg";
 import { parseCV } from "./utils/cvParser";
 
 function App() {
@@ -58,17 +58,25 @@ function App() {
       <Navbar />
 
       <div className="container mx-auto flex-1 p-6">
-        <UploadCV onCVParsed={handleCVParsed} />
-        <EmployeeForm data={employee} setData={setEmployee} />
 
-        <div className="flex justify-end mt-4">
+       <div className="flex flex-col xl:flex-row gap-16 justify-center items-start mt-16">
+  <UploadCV onCVParsed={handleCVParsed} />
+  <EmployeeForm
+    data={employee}
+    setData={setEmployee}
+    onSubmit={updateLetters}
+  />
+</div>
+
+
+        {/* <div className="flex justify-end mt-4">
           <button
             onClick={updateLetters}
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
-            Preview Letters
+            Submit
           </button>
-        </div>
+        </div> */}
 
         {/* Appointment Letter */}
         <LetterPreview

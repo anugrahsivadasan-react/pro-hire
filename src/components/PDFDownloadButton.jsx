@@ -1,26 +1,145 @@
-import React from "react";
+import React, { useState } from "react";
 import jsPDF from "jspdf";
 
-export default function PDFDownloadButton({ text, fileName, bgImage }) {
-  const downloadPDF = () => {
+export default function PDFPreviewButton({ text, fileName, bgImage }) {
+  const [showPreview, setShowPreview] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState(null);
+
+  const generatePDF = () => {
     const doc = new jsPDF();
+
+    // Background image
     if (bgImage) {
-      doc.addImage(bgImage, "JPEG", 0, 0, 210, 297, undefined, "FAST");
-      doc.setTextColor(0, 0, 0);
+      doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
+
+      doc.setFillColor(255, 255, 255);
+      doc.setGState(new doc.GState({ opacity: 0.85 }));
+      doc.rect(0, 0, 210, 297, "F");
+      doc.setGState(new doc.GState({ opacity: 1 }));
     }
+
+    doc.setTextColor(0, 0, 0);
+
+    const pageWidth = doc.internal.pageSize.getWidth();
     const lines = text.split("\n");
-    lines.forEach((line, index) => {
-      doc.text(line, 10, 10 + index * 10);
+    let y = 35;
+
+    lines.forEach((rawLine) => {
+      const line = rawLine.trim();
+
+      if (!line) {
+        y += 6;
+        return;
+      }
+
+      if (
+        line === "Appointment Letter" ||
+        line === "Offer Letter" ||
+        line === "INCREMENT LETTER"
+      ) {
+        doc.setFont("Times-Bold");
+        doc.setFontSize(16);
+        doc.text(line, pageWidth / 2, y, { align: "center" });
+        y += 16;
+        return;
+      }
+
+      const bold =
+        line.startsWith("Dear") ||
+        line.startsWith("Department:") ||
+        line.startsWith("Salary:") ||
+        line.startsWith("Offered Salary:") ||
+        line.startsWith("Joining date:") ||
+        line.startsWith("Start Date:") ||
+        line.startsWith("Your revised salary") ||
+        line.startsWith("Effective from") ||
+        line === "Best regards," ||
+        line === "Warm Regards," ||
+        line === "HR Team" ||
+        line === "HR Department" ||
+        line === "Finance Department" ||
+        line === "Ziya Academy LLP";
+
+      doc.setFont(bold ? "Times-Bold" : "Times-Roman");
+      doc.setFontSize(11);
+      doc.text(line, 20, y, { maxWidth: 170 });
+      y += 8;
     });
+
+    return doc;
+  };
+
+  const handlePreview = () => {
+    const doc = generatePDF();
+    const blobUrl = doc.output("bloburl");
+    setPdfUrl(blobUrl);
+    setShowPreview(true);
+  };
+
+  const handleDownload = () => {
+    const doc = generatePDF();
     doc.save(fileName);
   };
 
+  const handleSendMail = () => {
+    // Placeholder for backend/email integration
+    alert("Send mail functionality will be integrated here.");
+  };
+
   return (
-    <button
-      className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-2"
-      onClick={downloadPDF}
-    >
-      Download {fileName}
-    </button>
+    <>
+      {/* Preview Button */}
+      <button
+        onClick={handlePreview}
+        className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+      >
+        Preview Letter
+      </button>
+
+      {/* Modal */}
+      {showPreview && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-xl flex flex-col overflow-hidden">
+            {/* Header */}
+            <div className="flex justify-between items-center px-6 py-4 border-b">
+              <h2 className="text-lg font-semibold">
+                Letter Preview — {fileName}
+              </h2>
+              <button
+                onClick={() => setShowPreview(false)}
+                className="text-gray-500 hover:text-red-500 text-xl"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* PDF Preview */}
+            <div className="flex-1 bg-gray-100">
+              <iframe
+                src={pdfUrl}
+                title="PDF Preview"
+                className="w-full h-full"
+              />
+            </div>
+
+            {/* Actions */}
+            <div className="flex justify-end gap-3 px-6 py-4 border-t">
+              <button
+                onClick={handleSendMail}
+                className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100"
+              >
+                Send via Email
+              </button>
+              <button
+                onClick={handleDownload}
+                className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700"
+              >
+                Download PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

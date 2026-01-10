@@ -1,0 +1,68 @@
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
+const Dashboard = () => {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const tokenStr = localStorage.getItem('token');
+    if (!tokenStr) {
+      navigate('/login');
+      return;
+    }
+
+    try {
+      const token = JSON.parse(tokenStr);
+      if (token?.role !== 'employee') {
+        throw new Error('Not an employee');
+      }
+      setUser(token);
+    } catch (err) {
+      console.error('Invalid token');
+      localStorage.removeItem('token');
+      navigate('/login');
+    }
+  }, []);
+
+  return (
+    <div className="min-h-screen w-full bg-gradient-to-br from-white via-violet-100 to-violet-200 text-gray-900 font-sans relative">
+      
+     
+
+      {/* Welcome Section */}
+      <section className="flex flex-col items-start justify-center px-6 md:px-20 py-20 space-y-6 min-h-[80vh]">
+        <h2 className="text-4xl md:text-6xl font-black leading-tight text-gray-900 drop-shadow-sm">
+          Welcome to <br /> Ziya Academy  <span className="text-violet-700">{user?.name || 'Employee'}</span>!
+        </h2>
+        <p className="text-xl md:text-2xl text-gray-700 font-medium">
+          Glad to have you as our employee!!!
+        </p>
+        <button
+          onClick={() => navigate('/apply-leave')}
+          className="bg-violet-700 hover:bg-violet-800 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300"
+        >
+          Apply for Leave
+        </button>
+      </section>
+
+      {/* User Info */}
+      {user && (
+        <div className="absolute bottom-6 left-6 flex items-center space-x-4 bg-white/80 px-4 py-3 rounded-xl shadow-lg border border-violet-200">
+          <img
+            src={`https://ui-avatars.com/api/?name=${user.name}&background=8b5cf6&color=fff&size=64`}
+            alt="User Avatar"
+            className="w-12 h-12 rounded-full shadow-sm ring-2 ring-violet-400"
+          />
+          <div className="text-sm">
+            <p className="font-bold text-gray-900">{user.name}</p>
+            <p className="text-violet-600 font-medium">Employee</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Dashboard;
