@@ -7,6 +7,8 @@ import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import adminimg from '../assets/slams.png';
+// import login from '../assets/loginbg.png';
+import bgImage from '../assets/loginbg.jpg';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,31 +36,36 @@ const Login = () => {
       }
       navigate(foundUser.role === 'superadmin' ? '/super-admin' : '/sub-admin');
     } else {
-      setError('Invalid username or password');
+      setError('Invalid username or password'); 
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-200 relative overflow-hidden">
-      {/* Background Shapes */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-r from-pink-500 to-pink-400 rounded-full translate-x-1/3 translate-y-1/3 opacity-50"></div>
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-50"></div>
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-r from-green-500 to-emerald-400  -translate-x-1/2 -translate-y-1/2 opacity-50 rotate-45"></div>
-      <div className="absolute bottom-0 left-0 w-[900px] h-[600px] bg-gradient-to-r from-purple-500 to-indigo-500  translate-x-1/3 translate-y-1/3 opacity-50 rotate-45"></div>
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden
+    "
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: 'cover',}}>
+        
 
-      <div className="bg-white/20 backdrop-blur-lg shadow-lg rounded-2xl flex overflow-hidden w-[1200px] h-[800px] z-10 border border-white/30">
-        {/* Left Side Illustration */}
-        <div className="w-1/2 bg-gray-50/20 flex items-center justify-center p-8 relative">
-          <img
-            src={adminimg}
-            alt="Illustration"
-            className="w-[600px]  relative z-10"
-          />
-        </div>
+      
+
+      <div className="bg-white/20 backdrop-blur-lg shadow-lg rounded-2xl flex overflow-hidden w-[1200px] h-[700px] z-10 border border-white/30">
+       {/* Left Side Illustration */}
+<div className="w-1/2 bg-gray-50/20 flex flex-col items-center justify-center ">
+  <img
+    src={adminimg}
+    alt="Illustration"
+    className="w-[600px] "
+  />
+  <p className="text-[20px] text-gray-900  text-center ">
+    Empowering Employee Journeys with Precision
+  </p>
+</div>
 
         {/* Right Side Form */}
         <div className="w-1/2 p-10 flex flex-col justify-center">
-          <h2 className="flex justify-center text-5xl font-bold mb-6 text-pink-400">Welcome</h2>
+          <h2 className="flex justify-center text-5xl font-bold mb-6 text-dark-900">Welcome</h2>
 
           {error && (
             <p className="text-red-500 text-sm mb-3">{error}</p>
@@ -117,7 +124,7 @@ const Login = () => {
             {/* Sign In Button */}
             <button
               type="submit"
-              className="w-full bg-pink-400 text-white py-2 rounded-lg hover:bg-pink-500 transition"
+              className="w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-pink-500 transition"
             >
               Sign In
             </button>
@@ -145,7 +152,9 @@ const Login = () => {
           </form>
         </div>
       </div>
-    </div>
+      </div>
+    
+
   );
 };
 
