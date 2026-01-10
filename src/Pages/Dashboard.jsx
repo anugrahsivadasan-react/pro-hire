@@ -1,33 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import hr from "../assets/hr2.png";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  
-
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#ADD2DB] via-white to-[#6FAEC0] text-gray-900 font-sans relative">
+    <div className=" min-h-screen w-full bg-gradient-to-br from-[#ADD2DB] via-white to-[#6FAEC0] text-gray-900 font-sans relative">
       
-     
-
       {/* Welcome Section */}
-      <section className="flex flex-col items-start justify-center px-6 md:px-20 py-20 space-y-6 min-h-[80vh]">
-        <h2 className="text-4xl md:text-6xl font-black leading-tight text-gray-900 drop-shadow-sm">
-          Welcome to <br /> Pro-Hire  <span className="text-[#71AEC1]">{user?.name || 'Ziya Academy'}</span>!
-        </h2>
-        <p className="text-xl md:text-2xl text-gray-700 font-medium">
-          Glad to have you as our employee!!!
-        </p>
-        <button
-          onClick={() => navigate('/home')}
-          className="bg-[#7EB7C8] hover:bg-[#71AEC1] text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300"
-        >
-          Generate letters
-        </button>
-      </section>
+      <div className="flex flex-row min-h-screen">
+        
+        {/* Left Content */}
+        <section className="ml-[100px] flex flex-col items-start justify-center px-6 md:px-20 py-20 space-y-6 w-full md:w-1/2">
+          <h2 className="text-4xl md:text-6xl font-black leading-tight text-gray-900 drop-shadow-sm">
+            Welcome to <br /> Pro-Hire{" "}
+            <span className="text-[#107594]">
+              {user?.name || 'Ziya Academy'}
+            </span>
+            !
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-700 font-medium">
+            Generate professional letters in seconds, not hours!!!
+          </p>
+          <button
+            onClick={() => navigate('/home')}
+            className="bg-[#107594] hover:bg-[#71AEC1] text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300"
+          >
+            Generate letters
+          </button>
+        </section>
+
+        {/* Right Image - Centered */}
+        <div className="w-full md:w-1/2 flex items-center justify-center">
+          <img
+            src={hr}
+            alt="HR Illustration"
+            className="max-w-lg w-full object-contain"
+          />
+        </div>
+      </div>
 
       {/* User Info */}
       {user && (

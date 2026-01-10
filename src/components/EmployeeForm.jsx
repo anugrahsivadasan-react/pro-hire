@@ -45,7 +45,7 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
                 onChange={handleChange}
                 placeholder={field.placeholder}
                 className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-700
-                focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent
+                focus:outline-none focus:ring-2 focus:ring-[#107594] focus:border-transparent
                 transition"
               />
             </div>
@@ -55,8 +55,8 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
           <div className="md:col-span-2 flex justify-center mt-4">
             <button
               type="submit"
-              className="mt-8 w-full bg-green-500 text-white py-3 rounded-xl font-semibold
-          hover:bg-green-600 transition shadow-md h-12"
+              className="mt-8 w-full bg-[#107594] text-white py-3 rounded-xl font-semibold
+          hover:bg-cyan-600 transition shadow-md h-12"
             >
               Generate Letters
             </button>

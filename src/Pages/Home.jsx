@@ -10,7 +10,7 @@ import {
   generateOfferLetter,
   generateIncrementLetter,
 } from "../templates/appointmentLetter";
-import bgImage from "../assets/bg.png";
+import bgImage from "../assets/slamslogo.jpeg";
 import { parseCV } from "../utils/cvParser";
 
 const Home = () => {
