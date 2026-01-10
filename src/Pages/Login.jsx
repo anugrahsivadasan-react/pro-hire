@@ -22,8 +22,8 @@ const Login = () => {
     e.preventDefault();
 
     const dummyUser = [
-      { email: 'super@example.com', password: '12345', role: 'superadmin' },
-      { email: 'sub@example.com', password: '12345', role: 'subadmin' },
+      { email: 'super@example.com', password: '12345', role: 'Ziya' },
+      { email: 'sub@example.com', password: '12345', role: 'Ziyaaaa' },
     ];
 
     const foundUser = dummyUser.find(
@@ -34,7 +34,7 @@ const Login = () => {
       if (remember) {
         localStorage.setItem('user', JSON.stringify(foundUser));
       }
-      navigate(foundUser.role === 'superadmin' ? '/super-admin' : '/sub-admin');
+      navigate(foundUser.role === 'Ziya' ? '/dashboard' : '/sub-admin');
     } else {
       setError('Invalid username or password'); 
     }
@@ -50,7 +50,7 @@ const Login = () => {
 
       
 
-      <div className="bg-white/20 backdrop-blur-lg shadow-lg rounded-2xl flex overflow-hidden w-[1200px] h-[700px] z-10 border border-white/30">
+      <div className="bg-white/40 backdrop-blur-lg shadow-lg rounded-2xl flex overflow-hidden w-[1200px] h-[700px] z-10 border border-white/80">
        {/* Left Side Illustration */}
 <div className="w-1/2 bg-gray-50/20 flex flex-col items-center justify-center ">
   <img

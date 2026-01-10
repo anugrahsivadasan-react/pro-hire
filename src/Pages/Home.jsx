@@ -57,22 +57,28 @@ const Home = () => {
     <div className="bg-gray-50 min-h-screen flex flex-col">
       <Navbar />
 
-      <div className="container mx-auto flex-1 p-6">
+      <div className="container mx-auto flex-1 p-6 items-center jusify-center">
         {/* Upload CV */}
+        <div className="flex flex-row">
         <UploadCV onCVParsed={handleCVParsed} />
 
         {/* Employee Form */}
-        <EmployeeForm data={employee} setData={setEmployee} />
+<EmployeeForm
+  data={employee}
+  setData={setEmployee}
+  onSubmit={updateLetters}
+/>
+        </div>
 
         {/* Preview Button */}
-        <div className="flex justify-end mt-4">
+        {/* <div className="flex justify-end mt-4">
           <button
             onClick={updateLetters}
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
             Preview Letters
           </button>
-        </div>
+        </div> */}
 
         {/* Appointment Letter */}
         <LetterPreview
