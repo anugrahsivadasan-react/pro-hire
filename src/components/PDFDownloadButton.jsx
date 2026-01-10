@@ -131,15 +131,16 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
                 Send via Email
               </button>
               <button
-                onClick={handleDownload}
-                className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700"
-              >
-                Download PDF
-              </button>
+      className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-2"
+      onClick={downloadPDF}
+    > 
+      Download {fileName}
+    </button>
             </div>
           </div>
         </div>
       )}
     </>
+   
   );
 }

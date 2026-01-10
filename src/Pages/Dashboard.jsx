@@ -6,25 +6,7 @@ const Dashboard = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const tokenStr = localStorage.getItem('token');
-    if (!tokenStr) {
-      navigate('/login');
-      return;
-    }
-
-    try {
-      const token = JSON.parse(tokenStr);
-      if (token?.role !== 'employee') {
-        throw new Error('Not an employee');
-      }
-      setUser(token);
-    } catch (err) {
-      console.error('Invalid token');
-      localStorage.removeItem('token');
-      navigate('/login');
-    }
-  }, []);
+  
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-white via-violet-100 to-violet-200 text-gray-900 font-sans relative">
@@ -40,10 +22,10 @@ const Dashboard = () => {
           Glad to have you as our employee!!!
         </p>
         <button
-          onClick={() => navigate('/apply-leave')}
+          onClick={() => navigate('/home')}
           className="bg-violet-700 hover:bg-violet-800 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300"
         >
-          Apply for Leave
+          Generate letters
         </button>
       </section>
 
