@@ -8,7 +8,6 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
   const generatePDF = () => {
     const doc = new jsPDF();
 
-    // Background image
     if (bgImage) {
       doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
 
@@ -71,8 +70,9 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
 
   const handlePreview = () => {
     const doc = generatePDF();
-    const blobUrl = doc.output("bloburl");
-    setPdfUrl(blobUrl);
+    const blob = doc.output("blob");
+    const url = URL.createObjectURL(blob);
+    setPdfUrl(url);
     setShowPreview(true);
   };
 
@@ -82,7 +82,6 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
   };
 
   const handleSendMail = () => {
-    // Placeholder for backend/email integration
     alert("Send mail functionality will be integrated here.");
   };
 
@@ -90,6 +89,7 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
     <>
       {/* Preview Button */}
       <button
+        type="button"
         onClick={handlePreview}
         className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
       >
@@ -100,6 +100,7 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
       {showPreview && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <div className="bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-xl flex flex-col overflow-hidden">
+            
             {/* Header */}
             <div className="flex justify-between items-center px-6 py-4 border-b">
               <h2 className="text-lg font-semibold">
@@ -131,16 +132,15 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
                 Send via Email
               </button>
               <button
-      className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-2"
-      onClick={downloadPDF}
-    > 
-      Download {fileName}
-    </button>
+                onClick={handleDownload}
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              >
+                Download {fileName}
+              </button>
             </div>
           </div>
         </div>
       )}
     </>
-   
   );
 }

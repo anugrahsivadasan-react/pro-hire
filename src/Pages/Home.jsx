@@ -10,7 +10,7 @@ import {
   generateOfferLetter,
   generateIncrementLetter,
 } from "../templates/appointmentLetter";
-import bgImage from "../assets/bg.png";
+import bgImage from "../assets/slamslogo.jpeg";
 import { parseCV } from "../utils/cvParser";
 
 const Home = () => {
@@ -54,21 +54,23 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col">
+    <div className="bg-gray-50 min-h-screen flex flex-col ">
       <Navbar />
 
       <div className="container mx-auto flex-1 p-6 items-center jusify-center">
         {/* Upload CV */}
-        <div className="flex flex-row">
-        <UploadCV onCVParsed={handleCVParsed} />
+        <div className="min-h-screen flex items-center justify-center">
+  <div className="flex flex-row gap-20">
+    <UploadCV onCVParsed={handleCVParsed} />
 
-        {/* Employee Form */}
-<EmployeeForm
-  data={employee}
-  setData={setEmployee}
-  onSubmit={updateLetters}
-/>
-        </div>
+    {/* Employee Form */}
+    <EmployeeForm
+      data={employee}
+      setData={setEmployee}
+      onSubmit={updateLetters}
+    />
+  </div>
+</div>
 
         {/* Preview Button */}
         {/* <div className="flex justify-end mt-4">

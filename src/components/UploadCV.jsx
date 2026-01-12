@@ -96,7 +96,7 @@ export default function UploadCV({ onCVParsed }) {
           <label
             htmlFor="cv-upload"
             className="flex flex-col items-center justify-center gap-4 p-10 border-2 border-dashed rounded-2xl cursor-pointer transition
-            border-gray-300 hover:border-green-500 hover:bg-green-50"
+            border-gray-300 hover:border-[#107594] hover:bg-cyan-50"
           >
             <div className="text-5xl">📄</div>
             <p className="text-gray-700 font-semibold">
@@ -134,8 +134,8 @@ export default function UploadCV({ onCVParsed }) {
         </div>
 
         <button
-          className="mt-4 w-full bg-green-500 text-white py-3 rounded-xl font-semibold
-          hover:bg-green-600 transition shadow-md"
+          className="mt-4 w-full bg-[#107594] text-white py-3 rounded-xl font-semibold
+          hover:bg-cyan-600 transition shadow-md"
         >
           Check ATS Score (AI/ML)
         </button>
