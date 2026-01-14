@@ -40,19 +40,18 @@ const Home = () => {
   };
 
   // ✅ CV Parser Handler
-  const handleCVParsed = (text) => {
-    setCvText(text);
+  const handleCVParsed = (data) => {
+  console.log("Parsed CV Data:", data);
 
-    const parsed = parseCV(text);
+  setEmployee((prev) => ({
+    ...prev,
+    name: data.name || prev.name,
+    designation: data.designation || data.job_role || prev.designation,
+    email: data.email || prev.email,
+  }));
+};
 
-    setEmployee((prev) => ({
-      ...prev,
-      name: parsed.name || prev.name,
-      designation: parsed.designation || prev.designation,
-      email: parsed.email || prev.email,
-    }));
-  };
-
+ 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col ">
       <Navbar />
@@ -61,7 +60,7 @@ const Home = () => {
         {/* Upload CV */}
         <div className="min-h-screen flex items-center justify-center">
   <div className="flex flex-row gap-20">
-    <UploadCV onCVParsed={handleCVParsed} />
+<UploadCV onCVParsed={handleCVParsed} />
 
     {/* Employee Form */}
     <EmployeeForm

@@ -1,89 +1,74 @@
 import React, { useState, useEffect } from "react";
-import * as pdfjsLib from "pdfjs-dist";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
 
 export default function UploadCV({ onCVParsed }) {
   const [file, setFile] = useState(null);
-  const [text, setText] = useState("");
-  const [scrollY, setScrollY] = useState(0);
+  const [loading, setLoading] = useState(false);
 
+  // 🔁 Restore data after refresh
   useEffect(() => {
-    const savedFile = localStorage.getItem("uploadedCV");
-    const savedText = localStorage.getItem("cvText");
-    if (savedFile && savedText) {
+    const savedFile = localStorage.getItem("uploadedFile");
+    const savedCV = localStorage.getItem("parsedCV");
+
+    if (savedFile) {
       setFile(JSON.parse(savedFile));
-      setText(savedText);
-      onCVParsed(savedText);
     }
-  }, []);
 
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    if (savedCV) {
+      onCVParsed(JSON.parse(savedCV));
+    }
+  }, [onCVParsed]);
 
   const handleFileChange = async (e) => {
     const f = e.target.files[0];
     if (!f) return;
 
-    setFile(f);
-    localStorage.setItem("uploadedCV", JSON.stringify({ name: f.name }));
+    setLoading(true);
 
-    const reader = new FileReader();
-    reader.onload = async function () {
-      const typedArray = new Uint8Array(this.result);
-      const pdf = await pdfjsLib.getDocument(typedArray).promise;
+    // Save file name only
+    const fakeFile = { name: f.name };
+    setFile(fakeFile);
+    localStorage.setItem("uploadedFile", JSON.stringify(fakeFile));
 
-      let fullText = "";
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
-        fullText += textContent.items.map((item) => item.str).join(" ") + "\n";
-      }
+    const formData = new FormData();
+    formData.append("file", f);
 
-      setText(fullText);
-      localStorage.setItem("cvText", fullText);
-      onCVParsed(fullText);
-    };
+    try {
+      const res = await fetch("http://127.0.0.1:8000/parse-resume", {
+        method: "POST",
+        body: formData,
+      });
 
-    reader.readAsArrayBuffer(f);
+      if (!res.ok) throw new Error("Failed to parse PDF");
+
+      const data = await res.json();
+
+      const parsed = {
+        name: data.name || "",
+        designation: data.job_role || "",
+        email: data.email || "",
+        phone: data.phone || "",
+      };
+
+      // Save parsed data
+      localStorage.setItem("parsedCV", JSON.stringify(parsed));
+      onCVParsed(parsed);
+    } catch (err) {
+      console.error(err);
+      alert("Error parsing CV. Make sure backend is running.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const removeFile = () => {
     setFile(null);
-    setText("");
-    localStorage.removeItem("uploadedCV");
-    localStorage.removeItem("cvText");
-    onCVParsed("");
+    onCVParsed({});
+    localStorage.removeItem("uploadedFile");
+    localStorage.removeItem("parsedCV");
   };
 
   return (
     <section className="relative w-full max-w-xl h-[600px] overflow-hidden">
-      {/* Parallax Icons */}
-      {[
-        { icon: "📄", top: "10%", left: "10%", speed: 0.2 },
-        { icon: "🤖", top: "25%", right: "12%", speed: 0.3 },
-        { icon: "📊", bottom: "20%", left: "15%", speed: 0.25 },
-        { icon: "🧠", bottom: "12%", right: "18%", speed: 0.35 },
-      ].map((item, i) => (
-        <div
-          key={i}
-          className="absolute text-6xl opacity-10"
-          style={{
-            ...item,
-            transform: `translateY(${scrollY * item.speed}px)`,
-          }}
-        >
-          {item.icon}
-        </div>
-      ))}
-
-      {/* Upload Card */}
       <div className="relative z-10 h-full bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-100 p-10 flex flex-col justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">
@@ -112,6 +97,12 @@ export default function UploadCV({ onCVParsed }) {
               className="hidden"
             />
           </label>
+
+          {loading && (
+            <p className="text-center text-sm text-blue-500 mt-3">
+              Parsing CV...
+            </p>
+          )}
 
           {file && (
             <div className="mt-5 flex items-center justify-between bg-gray-50 border rounded-xl p-4">

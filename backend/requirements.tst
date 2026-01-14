@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pdfplumber
+python-docx
+spacy
+phonenumbers
+PyMuPDF
