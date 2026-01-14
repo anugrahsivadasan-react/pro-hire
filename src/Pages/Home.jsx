@@ -8,13 +8,21 @@ import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
 import {
   generateAppointmentLetter,
-  generateOfferLetter,
-  generateIncrementLetter,
+ 
 } from "../templates/appointmentLetter";
+
+import incrementLetter from "../templates/incrementLetter";
+import offerLetter from "../templates/offerLetter";
+import { companyTemplates } from "../templates/companyTemplates";
+
 import bgImage from "../assets/slamslogo.jpeg";
 import { parseCV } from "../utils/cvParser";
 import { motion, useScroll, useTransform } from "framer-motion";
 import LatestLettersSection from "../components/Homepage/LatestLettersSection";
+import Slams from "../assets/slamslogo.jpeg";
+import ziyaaaaBg from "../assets/logoHR.png"; // add another image
+
+
 
 const Home = () => {
   const [cvText, setCvText] = useState("");
@@ -25,7 +33,7 @@ const Home = () => {
   const { scrollYProgress } = useScroll();
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.2]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.6]);
-
+ 
   const containerVariants = {
   hidden: {},
   visible: {
@@ -56,14 +64,24 @@ const itemVariants = {
   });
 
   const updateLetters = () => {
-    setLetters({
-      appointment: generateAppointmentLetter(employee),
-      offer: generateOfferLetter(employee),
-      increment: generateIncrementLetter(employee),
-    });
-  };
+  const templates = companyTemplates[selectedCompany];
+
+  setLetters({
+    appointment: templates.appointment(employee),
+    offer: templates.offer(employee),
+    increment: templates.increment(employee),
+  });
+};
+
+
+const companyBackgrounds = {
+  Ziya: ziyaaaaBg,
+  Slams: Slams,
+};
+
 
   // ✅ CV Parser Handler
+const [selectedCompany, setSelectedCompany] = useState("Ziya");
 
   const handleCVParsed = (data) => {
   console.log("Parsed CV Data:", data);
@@ -179,6 +197,18 @@ const itemVariants = {
     transition={{ duration: 0.8, delay: 0.3 }}
     className="w-full md:w-1/2 self-stretch"
   >
+    <div className="mb-4">
+  <label className="font-semibold">Select Company</label>
+  <select
+    value={selectedCompany}
+    onChange={(e) => setSelectedCompany(e.target.value)}
+    className="w-full border p-2 rounded-lg mt-1"
+  >
+    <option value="Slams">Slams edu tech</option>
+    <option value="Ziya">Ziya Academy </option>
+  </select>
+</div>
+
     <EmployeeForm data={employee} setData={setEmployee} onSubmit={updateLetters} />
   </motion.div>
 </div>
@@ -198,14 +228,41 @@ const itemVariants = {
 
 
  {/* Letters + Buttons */}
-      <LetterPreview title="Appointment Letter" text={letters.appointment} bgImage={bgImage} />
-      <PDFDownloadButton text={letters.appointment} fileName="Appointment_Letter.pdf" bgImage={bgImage} />
+<LetterPreview
+  title="Appointment Letter"
+  text={letters.appointment}
+  bgImage={companyBackgrounds[selectedCompany]}
+/>
 
-      <LetterPreview title="Offer Letter" text={letters.offer} bgImage={bgImage} />
-      <PDFDownloadButton text={letters.offer} fileName="Offer_Letter.pdf" bgImage={bgImage} />
+<PDFDownloadButton
+  text={letters.appointment}
+  fileName="Appointment_Letter.pdf"
+  bgImage={companyBackgrounds[selectedCompany]}
+/>
 
-      <LetterPreview title="Increment Letter" text={letters.increment} bgImage={bgImage} />
-      <PDFDownloadButton text={letters.increment} fileName="Increment_Letter.pdf" bgImage={bgImage} />
+<LetterPreview
+  title="Offer Letter"
+  text={letters.offer}
+  bgImage={companyBackgrounds[selectedCompany]}
+/>
+
+<PDFDownloadButton
+  text={letters.offer}
+  fileName="Offer_Letter.pdf"
+  bgImage={companyBackgrounds[selectedCompany]}
+/>
+
+<LetterPreview
+  title="Increment Letter"
+  text={letters.increment}
+  bgImage={companyBackgrounds[selectedCompany]}
+/>
+
+<PDFDownloadButton
+  text={letters.increment}
+  fileName="Increment_Letter.pdf"
+  bgImage={companyBackgrounds[selectedCompany]}
+/>
 
       {employee.email && (
         <div className="mt-4 text-center">

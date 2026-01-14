@@ -92,7 +92,7 @@ export default function LatestLettersSection() {
                 <li key={i}>• {step}</li>
               ))}
             </ul>
-            <button className="mt-6 text-[#107594] font-semibold hover:underline">
+            <button className="mt-6 text-[#107594] font-semibold hover:underline  cursor-not-allowed opacity-70">
               View Details
             </button>
           </motion.div>
@@ -103,7 +103,7 @@ export default function LatestLettersSection() {
       <div className="mt-10 text-center">
         <a
           href="/letter-history"
-          className="inline-block bg-[#107594] text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#0d5a6a] transition"
+          className="inline-block bg-[#107594] text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#0d5a6a] transition  cursor-not-allowed opacity-70"
         >
           View All
         </a>

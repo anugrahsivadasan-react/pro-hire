@@ -144,13 +144,26 @@ export default function UploadCV({ onCVParsed }) {
             </div>
           )}
         </div>
+<div className="relative group w-full">
+  <button
+    disabled
+    className="mt-6 w-full bg-gradient-to-r from-[#107594] to-[#71AEC1] text-white py-3 rounded-xl font-semibold
+    transition-all duration-300 shadow-lg cursor-not-allowed opacity-70"
+  >
+    Check ATS Score
+  </button>
 
-        <button
-          className="mt-6 w-full bg-gradient-to-r from-[#107594] to-[#71AEC1] text-white py-3 rounded-xl font-semibold
-          hover:from-[#0d5a6a] hover:to-[#5ba0b5] transition-all duration-300 shadow-lg"
-        >
-          Check ATS Score (AI/ML)
-        </button>
+  {/* Tooltip */}
+  <div
+    className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100
+    transition-opacity duration-300 bg-black text-white text-sm px-3 py-1 rounded-lg shadow-md"
+  >
+    Feature currently not available
+    <div className="absolute left-1/2 -bottom-1 w-2 h-2 bg-black rotate-45 -translate-x-1/2"></div>
+  </div>
+</div>
+
+
       </motion.div>
     </section>
   );

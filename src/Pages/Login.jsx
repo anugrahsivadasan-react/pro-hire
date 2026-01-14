@@ -102,7 +102,7 @@ const Login = () => {
               </div>
 
               <div className="text-right mt-1">
-                <a href="#" className="text-sm text-gray-500 hover:text-gray-800">
+                <a href="#" className="text-sm text-gray-500 hover:text-gray-800  cursor-not-allowed opacity-70">
                   Forgot password?
                 </a>
               </div>
@@ -133,7 +133,7 @@ const Login = () => {
             {/* Google Login */}
             <button
               type="button"
-              className="w-full border flex items-center justify-center gap-2 py-2 rounded-lg hover:bg-gray-50 transition bg-white/60 backdrop-blur-sm"
+              className="w-full border flex items-center justify-center gap-2 py-2 rounded-lg hover:bg-gray-50 transition bg-white/60 backdrop-blur-sm  cursor-not-allowed opacity-70"
             >
               <img
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -147,7 +147,7 @@ const Login = () => {
             {/* Sign Up Link */}
             <p className="text-sm text-gray-500 text-center">
               Don’t have an account?{' '}
-              <a href="#" className="text-[] hover:underline">
+              <a href="#" className="text-[] hover:underline  cursor-not-allowed opacity-70">
                 Sign Up
               </a>
             </p>
