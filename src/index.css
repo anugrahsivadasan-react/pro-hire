@@ -5,6 +5,23 @@
 body {
   font-family: 'Inter', sans-serif;
 }
+
 html, body {
   overflow-x: hidden;
 }
+
+
+
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-12px); }
+  50% { transform: translateX(12px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+

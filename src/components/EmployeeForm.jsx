@@ -1,13 +1,32 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function EmployeeForm({ data, setData, onSubmit }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch("http://127.0.0.1:8000/submit-employee", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      toast.success(result.message);
+      onSubmit(); // Keep letter generation
+    } catch (err) {
+      console.error(err);
+      toast.error("Error submitting form");
+    }
+  };
+
+  console.log("Employee Form Data:", data);
 
   return (
     <motion.section
@@ -20,9 +39,7 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
       <div className="h-full bg-white/90 backdrop-blur-xl border border-gray-100 rounded-3xl shadow-2xl p-10 flex flex-col justify-between transition-all duration-300 hover:shadow-3xl">
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-extrabold text-gray-800">
-            Employee Details
-          </h2>
+          <h2 className="text-3xl font-extrabold text-gray-800">Employee Details</h2>
           <p className="text-base text-gray-600 mt-1">
             Enter employee information to generate official letters
           </p>
@@ -33,7 +50,7 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
           className="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1"
           onSubmit={(e) => {
             e.preventDefault();
-            onSubmit();
+            handleSubmit();
           }}
         >
           {[
@@ -51,7 +68,7 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
               <input
                 type={field.type}
                 name={field.name}
-                value={data[field.name]}
+                value={data[field.name] || ""}
                 onChange={handleChange}
                 placeholder={field.placeholder}
                 className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-700

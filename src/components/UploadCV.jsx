@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist";
 import { motion, useInView } from "framer-motion";
@@ -10,56 +11,78 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
 export default function UploadCV({ onCVParsed }) {
   const [file, setFile] = useState(null);
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
+  // 🔁 Restore data after refresh
   useEffect(() => {
-    const savedFile = localStorage.getItem("uploadedCV");
-    const savedText = localStorage.getItem("cvText");
-    if (savedFile && savedText) {
+    const savedFile = localStorage.getItem("uploadedFile");
+    const savedCV = localStorage.getItem("parsedCV");
+
+    if (savedFile) {
       setFile(JSON.parse(savedFile));
-      setText(savedText);
-      onCVParsed(savedText);
     }
-  }, []);
+
+
+    if (savedCV) {
+      onCVParsed(JSON.parse(savedCV));
+    }
+  }, [onCVParsed]);
+
 
   const handleFileChange = async (e) => {
     const f = e.target.files[0];
     if (!f) return;
 
-    setFile(f);
-    localStorage.setItem("uploadedCV", JSON.stringify({ name: f.name }));
+    setLoading(true);
 
-    const reader = new FileReader();
-    reader.onload = async function () {
-      const typedArray = new Uint8Array(this.result);
-      const pdf = await pdfjsLib.getDocument(typedArray).promise;
+    // Save file name only
+    const fakeFile = { name: f.name };
+    setFile(fakeFile);
+    localStorage.setItem("uploadedFile", JSON.stringify(fakeFile));
 
-      let fullText = "";
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
-        fullText += textContent.items.map((item) => item.str).join(" ") + "\n";
-      }
+    const formData = new FormData();
+    formData.append("file", f);
 
-      setText(fullText);
-      localStorage.setItem("cvText", fullText);
-      onCVParsed(fullText);
-    };
+    try {
+      const res = await fetch("http://127.0.0.1:8000/parse-resume", {
+        method: "POST",
+        body: formData,
+      });
 
-    reader.readAsArrayBuffer(f);
+      if (!res.ok) throw new Error("Failed to parse PDF");
+
+      const data = await res.json();
+
+      const parsed = {
+        name: data.name || "",
+        designation: data.job_role || "",
+        email: data.email || "",
+        phone: data.phone || "",
+      };
+
+      // Save parsed data
+      localStorage.setItem("parsedCV", JSON.stringify(parsed));
+      onCVParsed(parsed);
+    } catch (err) {
+      console.error(err);
+      alert("Error parsing CV. Make sure backend is running.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const removeFile = () => {
     setFile(null);
-    setText("");
-    localStorage.removeItem("uploadedCV");
-    localStorage.removeItem("cvText");
-    onCVParsed("");
+    onCVParsed({});
+    localStorage.removeItem("uploadedFile");
+    localStorage.removeItem("parsedCV");
   };
 
   return (
+
     <section className="relative w-full max-w-4xl  mx-auto px-4 py-10">
       {/* Upload Card with scroll-triggered animation */}
       <motion.div
@@ -69,6 +92,7 @@ export default function UploadCV({ onCVParsed }) {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="bg-white/90 backdrop-blur-xl  rounded-3xl shadow-2xl border border-gray-200 p-10 flex flex-col justify-between transition-all duration-300 hover:shadow-3xl"
       >
+
         <div>
           <h2 className="text-3xl font-extrabold text-gray-800 mb-3 text-center">
             Upload Employee CV
@@ -96,6 +120,12 @@ export default function UploadCV({ onCVParsed }) {
               className="hidden"
             />
           </label>
+
+          {loading && (
+            <p className="text-center text-sm text-blue-500 mt-3">
+              Parsing CV...
+            </p>
+          )}
 
           {file && (
             <div className="mt-6 flex items-center justify-between bg-gray-100 border rounded-xl p-4 shadow-sm">

@@ -64,22 +64,26 @@ const itemVariants = {
   };
 
   // ✅ CV Parser Handler
-  const handleCVParsed = (text) => {
-    setCvText(text);
-    const parsed = parseCV(text);
-    setEmployee((prev) => ({
-      ...prev,
-      name: parsed.name || prev.name,
-      designation: parsed.designation || prev.designation,
-      email: parsed.email || prev.email,
-    }));
-  };
 
+  const handleCVParsed = (data) => {
+  console.log("Parsed CV Data:", data);
+
+  setEmployee((prev) => ({
+    ...prev,
+    name: data.name || prev.name,
+    designation: data.designation || data.job_role || prev.designation,
+    email: data.email || prev.email,
+  }));
+};
+
+
+ 
   return (
     <div className="min-h-screen bg-white flex flex-col overflow-x-hidden">
 
           <div className="relative z-20">
     <Navbar />
+
   </div>
       {/* Banner Section */}
       <motion.div

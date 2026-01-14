@@ -88,13 +88,15 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
   return (
     <>
       {/* Preview Button */}
+      <div className="pl-6 pt-2 ">
       <button
         type="button"
         onClick={handlePreview}
-        className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+        className="bg-cyan-600 text-white px-5 py-2 pl-6 rounded-lg hover:bg-cyan-700 transition w-[200px]"
       >
         Preview Letter
       </button>
+      </div>
 
       {/* Modal */}
       {showPreview && (
