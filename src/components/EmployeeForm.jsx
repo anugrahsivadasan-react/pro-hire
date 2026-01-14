@@ -36,7 +36,7 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="relative w-full max-w-xl h-[600px]"
     >
-      <div className="h-full bg-white/90 backdrop-blur-xl border border-gray-100 rounded-3xl shadow-2xl p-10 flex flex-col justify-between transition-all duration-300 hover:shadow-3xl">
+      <div className="h-full bg-white/90 backdrop-blur-xl border border-[#107594] rounded-xl shadow-md p-10 flex flex-col justify-between transition-all duration-300 hover:shadow-3xl">
         {/* Header */}
         <div className="text-center mb-6">
           <h2 className="text-3xl font-extrabold text-gray-800">Employee Details</h2>

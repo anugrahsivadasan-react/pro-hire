@@ -6,6 +6,7 @@ import EmployeeForm from "../components/EmployeeForm";
 import LetterPreview from "../components/LetterPreview";
 import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
+import hr2 from "../assets/hr2.png";
 import {
   generateAppointmentLetter,
   generateOfferLetter,
@@ -161,26 +162,43 @@ const itemVariants = {
 </motion.section>
 
       {/* UploadCV + EmployeeForm with staggered animation */}
-    <div className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto px-4 items-start">
-  {/* UploadCV */}
+   <div className="w-full mx-auto px-4 space-y-10">
+  {/* UploadCV - Full Width */}
   <motion.div
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
-    className="w-full md:w-1/2 self-stretch"
+    className="w-full"
   >
     <UploadCV onCVParsed={handleCVParsed} />
   </motion.div>
 
-  {/* EmployeeForm */}
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8, delay: 0.3 }}
-    className="w-full md:w-1/2 self-stretch"
-  >
-    <EmployeeForm data={employee} setData={setEmployee} onSubmit={updateLetters} />
-  </motion.div>
+  {/* Bottom Split: Illustration + EmployeeForm */}
+  <div className="flex flex-col md:flex-row gap-14 items-center">
+    {/* Illustration */}
+    <motion.div
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8 }}
+      className="w-full md:w-1/2 flex justify-center"
+    >
+      <img
+        src={hr2}
+        alt="Onboarding Illustration"
+        className="max-w-lg w-full"
+      />
+    </motion.div>
+
+    {/* EmployeeForm */}
+    <motion.div
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+      className="w-full md:w-1/2"
+    >
+      <EmployeeForm data={employee} setData={setEmployee} onSubmit={updateLetters} />
+    </motion.div>
+  </div>
 </div>
 
      
