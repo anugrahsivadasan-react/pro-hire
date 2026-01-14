@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 export default function EmployeeForm({ data, setData, onSubmit }) {
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <section className="relative w-full max-w-xl h-[600px]">
-      <div className="h-full bg-white/90 backdrop-blur-xl border border-gray-100 rounded-3xl shadow-xl p-10 flex flex-col justify-between">
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="relative w-full max-w-xl h-[600px]"
+    >
+      <div className="h-full bg-white/90 backdrop-blur-xl border border-gray-100 rounded-3xl shadow-2xl p-10 flex flex-col justify-between transition-all duration-300 hover:shadow-3xl">
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">
+          <h2 className="text-3xl font-extrabold text-gray-800">
             Employee Details
           </h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-base text-gray-600 mt-1">
             Enter employee information to generate official letters
           </p>
         </div>
@@ -31,7 +41,7 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
             { label: "Designation", name: "designation", type: "text", placeholder: "" },
             { label: "Salary", name: "salary", type: "text", placeholder: "" },
             { label: "Department", name: "department", type: "text", placeholder: "" },
-            { label: "Joining Date", name: "joiningDate", type: "" },
+            { label: "Joining Date", name: "joiningDate", type: "date", placeholder: "" },
             { label: "Email Address", name: "email", type: "email", placeholder: "" },
           ].map((field) => (
             <div key={field.name}>
@@ -55,14 +65,14 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
           <div className="md:col-span-2 flex justify-center mt-4">
             <button
               type="submit"
-              className="mt-8 w-full bg-[#107594] text-white py-3 rounded-xl font-semibold
-          hover:bg-cyan-600 transition shadow-md h-12"
+              className="mt-8 w-full bg-gradient-to-r from-[#107594] to-[#71AEC1] text-white py-3 rounded-xl font-semibold
+              hover:from-[#0d5a6a] hover:to-[#5ba0b5] transition-all duration-300 shadow-lg h-12"
             >
               Generate Letters
             </button>
           </div>
         </form>
       </div>
-    </section>
+    </motion.section>
   );
 }

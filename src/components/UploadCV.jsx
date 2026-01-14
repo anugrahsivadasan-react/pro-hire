@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist";
+import { motion, useInView } from "framer-motion";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -9,7 +10,9 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
 export default function UploadCV({ onCVParsed }) {
   const [file, setFile] = useState(null);
   const [text, setText] = useState("");
-  const [scrollY, setScrollY] = useState(0);
+
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   useEffect(() => {
     const savedFile = localStorage.getItem("uploadedCV");
@@ -19,12 +22,6 @@ export default function UploadCV({ onCVParsed }) {
       setText(savedText);
       onCVParsed(savedText);
     }
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const handleFileChange = async (e) => {
@@ -63,46 +60,33 @@ export default function UploadCV({ onCVParsed }) {
   };
 
   return (
-    <section className="relative w-full max-w-xl h-[600px] overflow-hidden">
-      {/* Parallax Icons */}
-      {[
-        { icon: "📄", top: "10%", left: "10%", speed: 0.2 },
-        { icon: "🤖", top: "25%", right: "12%", speed: 0.3 },
-        { icon: "📊", bottom: "20%", left: "15%", speed: 0.25 },
-        { icon: "🧠", bottom: "12%", right: "18%", speed: 0.35 },
-      ].map((item, i) => (
-        <div
-          key={i}
-          className="absolute text-6xl opacity-10"
-          style={{
-            ...item,
-            transform: `translateY(${scrollY * item.speed}px)`,
-          }}
-        >
-          {item.icon}
-        </div>
-      ))}
-
-      {/* Upload Card */}
-      <div className="relative z-10 h-full bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-100 p-10 flex flex-col justify-between">
+    <section className="relative w-full max-w-4xl  mx-auto px-4 py-10">
+      {/* Upload Card with scroll-triggered animation */}
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="bg-white/90 backdrop-blur-xl  rounded-3xl shadow-2xl border border-gray-200 p-10 flex flex-col justify-between transition-all duration-300 hover:shadow-3xl"
+      >
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">
+          <h2 className="text-3xl font-extrabold text-gray-800 mb-3 text-center">
             Upload Employee CV
           </h2>
-          <p className="text-sm text-gray-500 mb-6 text-center">
-            Upload a PDF resume to analyze ATS compatibility
+          <p className="text-base text-gray-600 mb-8 text-center">
+            Upload a PDF resume to analyze ATS compatibility using AI
           </p>
 
           <label
             htmlFor="cv-upload"
-            className="flex flex-col items-center justify-center gap-4 p-10 border-2 border-dashed rounded-2xl cursor-pointer transition
+            className="flex flex-col items-center justify-center gap-4 p-10 border-2 border-dashed rounded-2xl cursor-pointer transition-all duration-300
             border-gray-300 hover:border-[#107594] hover:bg-cyan-50"
           >
-            <div className="text-5xl">📄</div>
-            <p className="text-gray-700 font-semibold">
+            <div className="text-6xl">📄</div>
+            <p className="text-gray-700 font-semibold text-lg">
               Click to upload or drag & drop
             </p>
-            <p className="text-xs text-gray-400">PDF files only</p>
+            <p className="text-sm text-gray-400">PDF files only</p>
 
             <input
               id="cv-upload"
@@ -114,14 +98,12 @@ export default function UploadCV({ onCVParsed }) {
           </label>
 
           {file && (
-            <div className="mt-5 flex items-center justify-between bg-gray-50 border rounded-xl p-4">
+            <div className="mt-6 flex items-center justify-between bg-gray-100 border rounded-xl p-4 shadow-sm">
               <div>
                 <p className="text-sm font-medium text-gray-700 truncate max-w-[220px]">
                   {file.name}
                 </p>
-                <p className="text-xs text-green-600">
-                  PDF uploaded successfully
-                </p>
+                <p className="text-xs text-green-600">PDF uploaded successfully</p>
               </div>
               <button
                 onClick={removeFile}
@@ -134,12 +116,12 @@ export default function UploadCV({ onCVParsed }) {
         </div>
 
         <button
-          className="mt-4 w-full bg-[#107594] text-white py-3 rounded-xl font-semibold
-          hover:bg-cyan-600 transition shadow-md"
+          className="mt-6 w-full bg-gradient-to-r from-[#107594] to-[#71AEC1] text-white py-3 rounded-xl font-semibold
+          hover:from-[#0d5a6a] hover:to-[#5ba0b5] transition-all duration-300 shadow-lg"
         >
           Check ATS Score (AI/ML)
         </button>
-      </div>
+      </motion.div>
     </section>
   );
 }
