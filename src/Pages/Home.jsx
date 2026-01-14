@@ -6,13 +6,14 @@ import EmployeeForm from "../components/EmployeeForm";
 import LetterPreview from "../components/LetterPreview";
 import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
-import {
-  generateAppointmentLetter,
+// import hr2 from "../assets/hr2.png";
+// import {
+//   generateAppointmentLetter,
  
-} from "../templates/appointmentLetter";
+// } from "../templates/appointmentLetter";
 
-import incrementLetter from "../templates/incrementLetter";
-import offerLetter from "../templates/offerLetter";
+// import incrementLetter from "../templates/incrementLetter";
+// import offerLetter from "../templates/offerLetter";
 import { companyTemplates } from "../templates/companyTemplates";
 
 import bgImage from "../assets/slamslogo.jpeg";
@@ -179,13 +180,13 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
 </motion.section>
 
       {/* UploadCV + EmployeeForm with staggered animation */}
-    <div className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto px-4 items-start">
-  {/* UploadCV */}
+   <div className="w-full mx-auto px-4 space-y-10">
+  {/* UploadCV - Full Width */}
   <motion.div
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
-    className="w-full md:w-1/2 self-stretch"
+    className="w-full"
   >
     <UploadCV onCVParsed={handleCVParsed} />
   </motion.div>
