@@ -6,7 +6,7 @@ import EmployeeForm from "../components/EmployeeForm";
 import LetterPreview from "../components/LetterPreview";
 import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
-// import hr2 from "../assets/hr2.png";
+import hr2 from "../assets/hr2.png";
 // import {
 //   generateAppointmentLetter,
  
@@ -80,6 +80,13 @@ const companyBackgrounds = {
   Slams: Slams,
 };
 
+const scrollToTarget = () => {
+  const target = document.getElementById("targetDiv");
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 
   // ✅ CV Parser Handler
 const [selectedCompany, setSelectedCompany] = useState("Ziya");
@@ -136,7 +143,7 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
           <p className="text-xl md:text-2xl text-black font-medium">
             Generate professional letters in seconds, not hours!!!
           </p>
-          <button className="bg-[#107594] hover:bg-[#71AEC1] text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300">
+          <button onClick={scrollToTarget} className="bg-[#107594] hover:bg-[#71AEC1] text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300">
             Generate letters
           </button>
         </section>
@@ -187,8 +194,10 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
     className="w-full"
-  >
+  > 
+  <div id="targetDiv">
     <UploadCV onCVParsed={handleCVParsed} />
+    </div>
   </motion.div>
 
   {/* EmployeeForm */}
