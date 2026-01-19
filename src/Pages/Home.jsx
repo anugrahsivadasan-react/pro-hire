@@ -6,7 +6,7 @@ import EmployeeForm from "../components/EmployeeForm";
 import LetterPreview from "../components/LetterPreview";
 import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
-// import hr2 from "../assets/hr2.png";
+import hr2 from "../assets/hr2.png";
 // import {
 //   generateAppointmentLetter,
  
@@ -98,7 +98,7 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
 
  
   return (
-    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden">
+    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden ">
 
           <div className="relative z-20">
     <Navbar />
@@ -192,27 +192,41 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
   </motion.div>
 
   {/* EmployeeForm */}
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8, delay: 0.3 }}
-    className="w-full md:w-1/2 self-stretch"
-  >
-    <div className="mb-4">
-  <label className="font-semibold">Select Company</label>
-  <select
-    value={selectedCompany}
-    onChange={(e) => setSelectedCompany(e.target.value)}
-    className="w-full border p-2 rounded-lg mt-1"
-  >
-    <option value="Slams">Slams edu tech</option>
-    <option value="Ziya">Ziya Academy </option>
-  </select>
+  
+   <div className="bg-blue-50 border-l-4   border-blue-400 p-4 rounded-xl text-md w-[1310px] ms-[30px] text-gray-700">
+  💡 Tip: Filling accurate details helps generate error-free letters instantly.
 </div>
 
-    <EmployeeForm data={employee} setData={setEmployee} onSubmit={updateLetters} />
-  </motion.div>
-</div>
+
+    <div className="flex flex-col md:flex-row gap-10 items-start mt-5">
+    {/* Illustration */}
+    <motion.div
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8 }}
+      className="w-full md:w-1/2 flex justify-center"
+    >
+      <img
+        src={hr2}
+        alt="Onboarding Illustration"
+        className="max-w-lg w-full"
+      />
+    </motion.div>
+
+    {/* EmployeeForm */}
+    <motion.div
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+      className="w-full md:w-1/2"
+    >
+      <EmployeeForm data={employee} setData={setEmployee} onSubmit={updateLetters} />
+    </motion.div>
+  </div>
+
+  
+
+
 
      
 
@@ -277,6 +291,7 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
       )}
 
       <Footer />
+    </div>
     </div>
   );
 };
