@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+ import { motion } from "framer-motion";
 import React from "react";
 import { FaFileAlt, FaArrowUp, FaPercentage, FaBullhorn } from "react-icons/fa";
 
@@ -68,7 +68,7 @@ export default function LatestLettersSection() {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">
+      <h2 className="text-3xl font-bold text-center text-gray-900 mb-20">
         Latest Generated Letters
       </h2>
 
@@ -92,7 +92,7 @@ export default function LatestLettersSection() {
                 <li key={i}>• {step}</li>
               ))}
             </ul>
-            <button className="mt-6 text-[#107594] font-semibold hover:underline  cursor-not-allowed opacity-70">
+            <button className="mt-14 text-[#faa302] font-semibold hover:underline  cursor-not-allowed opacity-70 ">
               View Details
             </button>
           </motion.div>
@@ -103,7 +103,7 @@ export default function LatestLettersSection() {
       <div className="mt-10 text-center">
         <a
           href="/letter-history"
-          className="inline-block bg-[#107594] text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#0d5a6a] transition  cursor-not-allowed opacity-70"
+          className="inline-block bg-[#faa302] mt-24 text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#0d5a6a] transition  cursor-not-allowed opacity-70"
         >
           View All
         </a>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import hr from "../assets/hr2.png";
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
+  const [user] = useState(null);
   const navigate = useNavigate();
 
   return (

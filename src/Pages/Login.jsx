@@ -50,7 +50,7 @@ const Login = () => {
 
       
 
-      <div className="bg-white/20 backdrop-blur-lg shadow-lg rounded-2xl flex overflow-hidden w-[1200px] h-[700px] z-10 border border-white/80">
+      <div className="bg-white/20 backdrop-blur-lg shadow-lg rounded-2xl flex overflow-hidden w-[1200px] h-[700px] z-10 border border-[#faa302]">
        {/* Left Side Illustration */}
 <div className="w-1/2 bg-gray-50/30 flex flex-col items-center justify-center ">
   <img
@@ -65,7 +65,7 @@ const Login = () => {
 
         {/* Right Side Form */}
         <div className="w-1/2 p-10 flex flex-col justify-center">
-          <h2 className="flex justify-center text-5xl font-bold mb-6 text-[#107594]">Welcome</h2>
+          <h2 className="flex justify-center text-5xl font-bold mb-6 text-[#faa302]">Welcome</h2>
 
           {error && (
             <p className="text-red-500 text-sm mb-3">{error}</p>
@@ -125,7 +125,7 @@ const Login = () => {
             <div className='space-y-4 pt-5'>
             <button
               type="submit"
-              className="w-full bg-[#107594] text-white py-2 rounded-lg hover:bg-[#0f9ac4] transition"
+              className="w-full bg-[#faa302] text-white py-2 rounded-lg hover:bg-[#b07404] transition"
             >
               Sign In
             </button>
