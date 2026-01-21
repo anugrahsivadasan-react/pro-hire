@@ -6,7 +6,7 @@ import EmployeeForm from "../components/EmployeeForm";
 import LetterPreview from "../components/LetterPreview";
 import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
-import hr2 from "../assets/hr2.png";
+import hr from "../assets/hr.png";
 // import {
 //   generateAppointmentLetter,
  
@@ -21,7 +21,7 @@ import { parseCV } from "../utils/cvParser";
 import { motion, useScroll, useTransform } from "framer-motion";
 import LatestLettersSection from "../components/Homepage/LatestLettersSection";
 import Slams from "../assets/slamslogo.jpeg";
-import ziyaaaaBg from "../assets/logoHR.png"; // add another image
+import ziyaaaaBg from "../assets/logoHR.png"; // add another +
 
 
 
@@ -105,7 +105,7 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
 
  
   return (
-    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden ">
+    <div className="min-h-screen bg-gray-900 flex flex-col overflow-x-hidden ">
 
           <div className="relative z-20">
     <Navbar />
@@ -130,7 +130,7 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
         <div className="absolute inset-0 bg-black/50"></div>
         {/* Smooth fade into white */}
         
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-900 pointer-events-none"></div>
 
        
 
@@ -138,21 +138,21 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
         <section className="relative ml-[100px] flex flex-col items-start justify-center md:px-20 py-40 space-y-6 w-full md:w-1/2 z-10">
           <h2 className="text-4xl md:text-7xl font-[900] text-white drop-shadow-sm flex-wrap">
             Welcome to Pro-Hire{" "}
-            <span className="text-[#107594]">{user?.name || "Ziya Academy"}</span>!
+            <span className="text-[#faa302]">{user?.name || "Ziya Academy"}</span>!
           </h2>
-          <p className="text-xl md:text-2xl text-black font-medium">
+          <p className="text-xl md:text-2xl text-white font-medium">
             Generate professional letters in seconds, not hours!!!
           </p>
-          <button onClick={scrollToTarget} className="bg-[#107594] hover:bg-[#71AEC1] text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300">
+          <button onClick={scrollToTarget} className="bg-[#faa302] hover:bg-[#71AEC1] text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300">
             Generate letters
           </button>
         </section>
       </motion.div>
 
       {/* Workflow Heading */}
-      <div className="flex-col justify-center text-center mt-10">
-        <h1 className="text-[50px] text-gray-800 font-[800]">One Seamless Workflow</h1>
-        <p className="text-[20px] font-[500] text-[#4D4D4D]">
+      <div className="flex-col justify-center text-center mt-20">
+        <h1 className="text-[50px] text-white font-[800]">One Seamless Workflow</h1>
+        <p className="text-[20px] font-[500] text-white ">
           Generate Offers, Appointments, and promotion letters in a streamlined, efficient process.
         </p>
       </div>
@@ -165,8 +165,8 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
   whileInView="visible"
   viewport={{ once: true }}
 >
-  <h2 className="text-3xl font-bold text-gray-800 mb-8">Your 3-Step Workflow</h2>
-  <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-gray-600 font-medium">
+  <h2 className="text-3xl font-bold text-[#faa302] mb-8">Your 3-Step Workflow</h2>
+  <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-white font-medium">
     {[
       { number: "1", label: "Upload CV ->" },
       { number: "2", label: "Fill Employee Details  ->" },
@@ -177,7 +177,7 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
         variants={itemVariants}
         className="flex items-center gap-2"
       >
-        <div className="w-8 h-8 rounded-full bg-[#107594] text-white flex items-center justify-center font-bold">
+        <div className="w-8 h-8 rounded-full bg-[#faa302] text-white flex items-center justify-center font-bold">
           {step.number}
         </div>
         <span>{step.label}</span>
@@ -202,12 +202,14 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
 
   {/* EmployeeForm */}
   
-   <div className="bg-blue-50 border-l-4   border-blue-400 p-4 rounded-xl text-md w-[1310px] ms-[30px] text-gray-700">
-  💡 Tip: Filling accurate details helps generate error-free letters instantly.
-</div>
+  <div className="flex flex-col space-y-24">
+  {/* Tip box */}
+  <div className="bg-orange-50 border-l-4 flex items-center border-blue-400 p-4 rounded-xl text-md w-auto me-6 ms-[30px] text-gray-700">
+    💡 Tip: Filling accurate details helps generate error-free letters instantly.
+  </div>
 
-
-    <div className="flex flex-col md:flex-row gap-10 items-start mt-5">
+  {/* Illustration + EmployeeForm */}
+  <div className="flex flex-col md:flex-row gap-10 items-center">
     {/* Illustration */}
     <motion.div
       initial={{ opacity: 0, x: -50 }}
@@ -216,9 +218,9 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
       className="w-full md:w-1/2 flex justify-center"
     >
       <img
-        src={hr2}
+        src={hr}
         alt="Onboarding Illustration"
-        className="max-w-lg w-full"
+        className="max-w-lg min-h-[400px] w-full"
       />
     </motion.div>
 
@@ -229,19 +231,17 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
       transition={{ duration: 0.8, delay: 0.3 }}
       className="w-full md:w-1/2"
     >
-      <EmployeeForm data={employee} setData={setEmployee} onSubmit={updateLetters} />
+      <EmployeeForm
+        data={employee}
+        setData={setEmployee}
+        onSubmit={updateLetters}
+      />
     </motion.div>
   </div>
-
+</div>
   
-
-
-
-     
-
-
   <motion.div
-    className="bg-orange-50 mt-24"
+    className="bg-white mt-24"
         variants={itemVariants}>
 <LatestLettersSection/>
   </motion.div>

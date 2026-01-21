@@ -83,31 +83,31 @@ export default function UploadCV({ onCVParsed }) {
 
   return (
 
-    <section className="relative w-full max-w-6xl  mx-auto px-4 py-10">
+    <section className="relative w-full max-w-7xl mb-24 mx-auto px-4 py-10">
       {/* Upload Card with scroll-triggered animation */}
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="bg-white/90 backdrop-blur-xl  rounded-xl shadow-lg border border-gray-200 p-10 flex flex-col justify-between transition-all duration-300 hover:shadow-3xl"
+        className="bg-gray-900  rounded-xl shadow-lg border border-white p-10 flex flex-col justify-between transition-all duration-300 hover:shadow-3xl"
       >
 
         <div>
-          <h2 className="text-3xl font-extrabold text-gray-800 mb-3 text-center">
+          <h2 className="text-3xl font-extrabold text-white mb-3 text-center">
             Upload Employee CV
           </h2>
-          <p className="text-base text-gray-600 mb-8 text-center">
+          <p className="text-base text-[#faa302] mb-8 text-center">
             Upload a PDF resume to analyze ATS compatibility using AI
           </p>
 
           <label
             htmlFor="cv-upload"
             className="flex flex-col items-center justify-center gap-4 p-10 border-2 border-dashed rounded-2xl cursor-pointer transition-all duration-300
-            border-gray-300 hover:border-[#107594] hover:bg-cyan-50"
+            border-gray-300 hover:border-[#faa302] hover:bg-gray-500 "
           >
             <div className="text-6xl">📄</div>
-            <p className="text-gray-700 font-semibold text-lg">
+            <p className=" font-semibold text-lg text-white">
               Click to upload or drag & drop
             </p>
             <p className="text-sm text-gray-400">PDF files only</p>
@@ -147,7 +147,7 @@ export default function UploadCV({ onCVParsed }) {
 <div className="relative group w-full">
   <button
     disabled
-    className="mt-6 w-full bg-gradient-to-r from-[#107594] to-[#71AEC1] text-white py-3 rounded-xl font-semibold
+    className="mt-6 w-full  bg-[#faa302]  text-white py-3 rounded-xl font-semibold
     transition-all duration-300 shadow-lg cursor-not-allowed opacity-70"
   >
     Check ATS Score
