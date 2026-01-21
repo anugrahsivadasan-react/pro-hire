@@ -225,11 +225,16 @@ const Home = () => {
 </div>
 
 
+
   <motion.div
     className="bg-white mt-24"
         variants={itemVariants}>  
 <LatestLettersSection/>
   </motion.div>
+
+  
+
+
 
 
 
@@ -239,6 +244,7 @@ const Home = () => {
   selectedCompany={selectedCompany}
   companyBackgrounds={companyBackgrounds}
 />
+
 
 
 
