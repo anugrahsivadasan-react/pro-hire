@@ -1,5 +1,8 @@
 # main.py
-# Run with: uvicorn main:app --reload
+# Run with:
+# python -m venv venv
+# venv\Scripts\activate
+#  uvicorn main:app --reload
 
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
