@@ -3,9 +3,17 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import UploadCV from "../components/UploadCV";
 import EmployeeForm from "../components/EmployeeForm";
-import LetterPreview from "../components/LetterPreview";
-import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
+import GeneratedLettersSection from "../components/Homepage/GeneratedLettersSection";
+// import {
+//   generateAppointmentLetter,
+
+// } from "../templates/appointmentLetter";
+
+// import incrementLetter from "../templates/incrementLetter";
+// import offerLetter from "../templates/offerLetter";
+import LetterPreview from "../components/LetterPreview";
+
 import { companyTemplates } from "../templates/companyTemplates";
 import Slams from "../assets/slamsbg.png";
 import ziyaaaaBg from "../assets/logoHR.png";
@@ -65,8 +73,16 @@ const Home = () => {
 
   // 🔴 useEffect should be placed HERE
   useEffect(() => {
-    updateLetters();
-  }, [selectedCompany, employee]);
+  updateLetters();
+}, [
+  selectedCompany,
+  employee.name,
+  employee.designation,
+  employee.salary,
+  employee.department,
+  employee.joiningDate,
+]);
+
 
   const updateLetters = () => {
     const templates = companyTemplates[selectedCompany];
@@ -207,52 +223,32 @@ const Home = () => {
         </motion.div>
       </div>
 
-      {/* Letters + Buttons */}
-      <div className="flex w-full">
-        <div className="flex flex-col items-center w-1/3">
-          <LetterPreview
-            title="Appointment Letter"
-            text={letters.appointment}
-            bgImage={companyBackgrounds[selectedCompany]}
-          />
-          <PDFDownloadButton
-            text={letters.appointment}
-            fileName="Appointment_Letter.pdf"
-            bgImage={companyBackgrounds[selectedCompany]}
-          />
-        </div>
+     
 
-        <div className="flex flex-col items-center w-1/3">
-          <LetterPreview
-            title="Offer Letter"
-            text={letters.offer}
-            bgImage={companyBackgrounds[selectedCompany]}
-          />
-          <PDFDownloadButton
-            text={letters.offer}
-            fileName="Offer_Letter.pdf"
-            bgImage={companyBackgrounds[selectedCompany]}
-          />
-        </div>
 
-        <div className="flex flex-col items-center w-1/3">
-          <LetterPreview
-            title="Increment Letter"
-            text={letters.increment}
-            bgImage={companyBackgrounds[selectedCompany]}
-          />
-          <PDFDownloadButton
-            text={letters.increment}
-            fileName="Increment_Letter.pdf"
-            bgImage={companyBackgrounds[selectedCompany]}
-          />
-        </div>
-      </div>
+  <motion.div
+    className="bg-white mt-24"
+        variants={itemVariants}>  
+<LatestLettersSection/>
+  </motion.div>
 
-      <motion.div className="bg-white mt-24" variants={itemVariants}>
-        <LatestLettersSection />
-      </motion.div>
+  
 
+
+
+
+
+
+<GeneratedLettersSection
+  letters={letters}
+  selectedCompany={selectedCompany}
+  companyBackgrounds={companyBackgrounds}
+/>
+
+
+
+
+      {/* Mail Button */}
       {employee.email && (
         <div className="mt-4 text-center">
           <a

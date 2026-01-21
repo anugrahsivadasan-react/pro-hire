@@ -28,7 +28,7 @@ export default function UploadCV({ onCVParsed }) {
     if (savedCV) {
       onCVParsed(JSON.parse(savedCV));
     }
-  }, [onCVParsed]);
+  }, []);
 
 
   const handleFileChange = async (e) => {
