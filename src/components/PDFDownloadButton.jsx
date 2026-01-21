@@ -18,23 +18,11 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
 
     let y = marginTop;
 
-    // const addBackground = () => {
-    //   if (bgImage) {
-    //     doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
-
-    //     doc.setFillColor(255, 255, 255);
-    //     doc.setGState(new doc.GState({ opacity: 0.85 }));
-    //     doc.rect(0, 0, 210, 297, "F");
-    //     doc.setGState(new doc.GState({ opacity: 1 }));
-    //   }
-    // };
-
     const addBackground = () => {
-  if (bgImage) {
-    doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
-  }
-};
-
+      if (bgImage) {
+        doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
+      }
+    };
 
     addBackground();
     doc.setTextColor(0, 0, 0);
@@ -58,51 +46,60 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
         return;
       }
 
-      // Title formatting
+      // MAIN HEADINGS (CENTER + BOLD)
       if (
-        line === "Appointment Letter" ||
         line === "APPOINTMENT LETTER" ||
-        line === "Offer Letter" ||
-        line === "INCREMENT LETTER"
+        line === "OFFER LETTER" ||
+        line === "INCREMENT LETTER" ||
+        line === "EMPLOYMENT AGREEMENT"
       ) {
         doc.setFont("Times-Bold");
         doc.setFontSize(16);
         doc.text(line, pageWidth / 2, y, { align: "center" });
-        y += 16;
+        y += 14;
         checkPageBreak();
         return;
       }
 
-      const bold =
-        line.startsWith("Dear") ||
-        line.startsWith("Department:") ||
-        line.startsWith("Salary:") ||
-        line.startsWith("Offered Salary:") ||
-        line.startsWith("Joining date:") ||
-        line.startsWith("Start Date:") ||
-        line.startsWith("Your revised salary") ||
-        line.startsWith("Effective from") ||
-        line === "Best regards," ||
-        line === "Warm Regards," ||
-        line === "HR Team" ||
-        line === "HR Department" ||
-        line === "Finance Department" ||
-        line === "Ziya Academy LLP";
+      // SUB HEADINGS (LEFT + BOLD)
+      const subHeadingPatterns = [
+        /^Subject:/i,
+        /^Dear/i,
+        /^[0-9]+\./,
+        /^EMPLOYMENT AGREEMENT/i,
+        /^For /i,
+        /^Authorized Signatory/i,
+        /^Date:/i,
+        /^Salary/i,
+        /^Joining Date/i,
+        /^Effective/i,
+        /^Revised Salary/i,
+        /^Best Regards/i,
+        /^Warm Regards/i,
+        /^Sincerely/i,
+        /^Acknowledgement/i,
+        /^HR/i,
+        /^Ziya Academy/i,
+        /^Slams/i
+      ];
 
-      doc.setFont(bold ? "Times-Bold" : "Times-Roman");
-      doc.setFontSize(11);
+      const isSubHeading = subHeadingPatterns.some((pattern) =>
+        pattern.test(line)
+      );
+
+      doc.setFont(isSubHeading ? "Times-Bold" : "Times-Roman");
+      doc.setFontSize(isSubHeading ? 15 : 11);
 
       const splitText = doc.splitTextToSize(line, 170);
 
       splitText.forEach((txtLine) => {
-  doc.text(txtLine, leftMargin, y, {
-    maxWidth: 170,
-    align: "justify",
-  });
-  y += lineHeight;
-  checkPageBreak();
-});
-
+        doc.text(txtLine, leftMargin, y, {
+          maxWidth: 170,
+          align: isSubHeading ? "left" : "justify",
+        });
+        y += lineHeight;
+        checkPageBreak();
+      });
     });
 
     return doc;
@@ -127,7 +124,6 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
 
   return (
     <>
-      {/* Preview Button */}
       <div className="pl-6 pt-2">
         <button
           type="button"
@@ -138,12 +134,9 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
         </button>
       </div>
 
-      {/* Modal */}
       {showPreview && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <div className="bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-xl flex flex-col overflow-hidden">
-            
-            {/* Header */}
             <div className="flex justify-between items-center px-6 py-4 border-b">
               <h2 className="text-lg font-semibold">
                 Letter Preview — {fileName}
@@ -156,7 +149,6 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
               </button>
             </div>
 
-            {/* PDF Preview */}
             <div className="flex-1 bg-gray-100">
               <iframe
                 src={pdfUrl}
@@ -165,7 +157,6 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
               />
             </div>
 
-            {/* Actions */}
             <div className="flex justify-end gap-3 px-6 py-4 border-t">
               <button
                 onClick={handleSendMail}

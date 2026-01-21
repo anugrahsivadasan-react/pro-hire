@@ -167,23 +167,145 @@ Designation:
 
   offer: (emp) => `
 OFFER LETTER
-Ziya Academy LLP
+                                  Date: ${new Date().toLocaleDateString()}
 
-Date: ${new Date().toLocaleDateString()}
+Subject: Offer of Employment
 
 Dear ${emp.name},
+We are delighted to extend to you an offer for the position of ${emp.designation} at Ziya
+Academy. We were truly impressed with your skills and background, and we believe you will be
+a valuable addition to our team.
+1. Date of Commencement and Probation
+You will initially be on a probationary period of 3 Months, during which we will support your
+onboarding and growth. During your probation period, your performance, conduct, and overall
+contribution will be closely observed and reviewed to ensure alignment with the expectations of
+the role and the values of the organization.
 
-We are pleased to offer you the role of ${emp.designation} 
-in the ${emp.department} department at Ziya Academy LLP.
+Your expected date of joining is ${emp.joiningDate}, and you will be based at our Ernakulam office.
 
-Salary Offered : ${emp.salary}  
-Joining Date   : ${emp.joiningDate}
+From the date of your joining, you will be expected to adhere to the rules, regulations, and policies
+prevailing within the company. These guidelines are designed to maintain a positive, respectful,
+and productive work environment. Please note that any deviation or violation may lead to
+appropriate corrective actions, which may include a formal warning or, in serious cases,
+reconsideration of your employment status.
+2. Location / Transferability
+You will work from Company office at Aluva (“Work Location”). However, Company may ask
+or allow you to work remotely (that is from your place of residence) within the city of Work
+Location.
+Your services may be transferred to any other department or client program within the Company,
+or to any other Affiliate of Company due to Company’s business engagement and requirements,
+and you may be asked to relocate to any other location within India or overseas, on the same
+terms and conditions as contained in this Offer Letter except for any changes necessitated due to
+applicable regulations or prevalent policy for the location. The company will make all reasonable
+efforts to ensure that you are not adversely impacted and that any change, transition or transfer is
+made as smooth as possible for you.
 
-Please confirm your acceptance.
+During the course of employment, your reporting manager may change time-to-time, depending on
+the nature of assignment/ task given to you.
+3. Remuneration/Salary
+The position offers a gross monthly compensation of ${emp.salary}, subject to applicable deductions,
+along with access to company benefits and a supportive work environment.
+4. Background Checks / Disclosure of Information
+Your employment with us is contingent on the subject to successful clearance of background
+verification.
+You need to submit all relevant documents for background verification and the Company may,
+at any time, (or as part of the joining formalities) conduct reference/ background checks, reference
+check with previous employers, education qualifications, credit history as applicable, exclusion
+screening, criminal background, etc.).
+In the event the statements / particulars furnished by you at the time of joining are found to be false
+or misleading or any information is suppressed, or if the Company, during the course of the check
+receives any adverse report against you that may be detrimental to the interests of the Company,
+then the Company shall have the right to terminate your services forthwith without any notice
+period.
+5. Duties & Services
+You will be responsible to perform all the work assigned to you from time to time. You shall
+discharge your duties in a diligent, trustworthy, businesslike, and efficient manner. You will abide
+by the code of conduct, policies, procedures, rules and regulations stipulated from time to time by
+the Company. If required, the Company will provide the required training to you in updating your
+relevant knowledge for discharge of your duties efficiently and effectively, which will be as per
+the needs of business of the Company from time to time.
+You may be required to sign a separate agreement with the Company, should the Company send
+you for any training, deputation or any other assignment, either in India or abroad and you shall be
+strictly bound by the terms and conditions of any such agreement that you may sign.
 
-Best Regards,  
-HR Team  
-Ziya Academy LLP
+
+6. Annual Review
+At the discretion of the Company, your performance and total compensation may be reviewed by
+the Company from time to time or annually as per the policy of the Company. If your performance
+is not found satisfactory, then the Company shall have the right to terminate your employment in
+accordance with the terms of the Company Policy.
+7. Personal Information
+The personal information you provide to the Company in connection with your recruitment and
+subsequent employment will be used for the purpose of administering your employment with the
+Company and the Company’s human resources generally. The Company may give out some of
+this information to other parties authorized by law to receive it. You have the right to access and
+correct any of your personal data in the Company’s possession. Any request for personal data
+access and/or correction should be addressed to the Human Resources Department. You shall keep
+the company informed of any change in your present or permanent address.
+8. Work Schedule
+Your working days and shift timings, including any changes therein, will be decided and informed
+to you by your supervisor. If you are required to work overtime and on holidays, you may be
+entitled to allowance in accordance with Company policy.
+
+9. Absence
+If you do not report for work for 3 or more consecutive working days without prior information to
+and approval of your supervisor, it will be considered as an act of indiscipline and dereliction of
+duty and will be dealt with as per disciplinary policy or code of conduct of Company.
+10. Standard of business conduct
+This Offer Letter contains some provisions of the Company's Code of Conduct and other Company
+policies and procedures. These may be amended by the Company from time to time. You agree
+that you will regularly visit the intranet of the Company and keep yourself current with the
+prevalent policies and procedures. You also agree to complete the various training sessions and
+training modules that the Company may want you to undergo.
+You may be required to sign a separate agreement with the Company, should the Company send
+you along with the Appointment letter and you shall be strictly bound by the terms and conditions
+of any such agreement that you may sign.
+11. Precedence
+In the event of any inconsistency between this Agreement and the Company’s Code of Conduct,
+policies, or procedures, as the case may be, the prevalent Code of Conduct, policies or procedures
+shall prevail.
+12. Governing Law and Jurisdiction
+This Agreement is made with reference to the law of India and the appropriate court in Kochi will
+be the jurisdiction for all legal governance.
+
+Provided that further details regarding employment terms, please refer to the Company’s
+Policies, in the Handbook which forms part of your service conditions and are subject to
+change from time to time.
+13. Miscellaneous
+
+1. Any claim relating to your employment with the Company shall be time-barred and
+not to be raised beyond six (6) months from your last working day with the
+Company and shall not be entertained unless applicable laws provide otherwise.
+2. You shall not pledge / use the Company’s name for personal purposes unless
+otherwise authorized by the Company.
+3. The Company shall not be responsible and liable for any actions or omissions
+committed or executed by you in your personal capacity or on your behalf within
+or outside the office premises. All liabilities arising out of such actions shall be
+your sole responsibility. You shall indemnify the Company against any claim
+arising out of your acts or omissions and also make good any loss or damages
+Company may be subject to.
+
+4. You shall not give or receive any gift /cash equivalent, in your official capacity
+representing the Company unless otherwise authorized by the Company.
+
+Sincerely,
+For Ziya Academy
+
+Aslam
+Managing Director Ziya Academy
+
+
+Acknowledgement:
+
+By signing, I confirm that I have read and completely understand the terms and conditions of this
+Offer Letter and agree to accept this offer of employment with Company.
+Please return a signed copy of this letter to confirm your offer of acceptance.
+
+Candidate Name:
+
+Candidate Signature:
+
+
 `,
 
   increment: (emp) => `
@@ -380,23 +502,145 @@ Designation:
 
   offer: (emp) => `
 OFFER LETTER
-Slams edu tech
+                                  Date: ${new Date().toLocaleDateString()}
 
-Date: ${new Date().toLocaleDateString()}
+Subject: Offer of Employment
 
 Dear ${emp.name},
+We are delighted to extend to you an offer for the position of ${emp.designation} at Slams Edu Tech
+. We were truly impressed with your skills and background, and we believe you will be
+a valuable addition to our team.
+1. Date of Commencement and Probation
+You will initially be on a probationary period of 3 Months, during which we will support your
+onboarding and growth. During your probation period, your performance, conduct, and overall
+contribution will be closely observed and reviewed to ensure alignment with the expectations of
+the role and the values of the organization.
 
-We are excited to offer you the position of ${emp.designation} 
-in our ${emp.department} team.
+Your expected date of joining is ${emp.joiningDate}, and you will be based at our Ernakulam office.
 
-Salary Package : ${emp.salary}  
-Joining Date   : ${emp.joiningDate}
+From the date of your joining, you will be expected to adhere to the rules, regulations, and policies
+prevailing within the company. These guidelines are designed to maintain a positive, respectful,
+and productive work environment. Please note that any deviation or violation may lead to
+appropriate corrective actions, which may include a formal warning or, in serious cases,
+reconsideration of your employment status.
+2. Location / Transferability
+You will work from Company office at Aluva (“Work Location”). However, Company may ask
+or allow you to work remotely (that is from your place of residence) within the city of Work
+Location.
+Your services may be transferred to any other department or client program within the Company,
+or to any other Affiliate of Company due to Company’s business engagement and requirements,
+and you may be asked to relocate to any other location within India or overseas, on the same
+terms and conditions as contained in this Offer Letter except for any changes necessitated due to
+applicable regulations or prevalent policy for the location. The company will make all reasonable
+efforts to ensure that you are not adversely impacted and that any change, transition or transfer is
+made as smooth as possible for you.
 
-We await your confirmation.
+During the course of employment, your reporting manager may change time-to-time, depending on
+the nature of assignment/ task given to you.
+3. Remuneration/Salary
+The position offers a gross monthly compensation of ${emp.salary}, subject to applicable deductions,
+along with access to company benefits and a supportive work environment.
+4. Background Checks / Disclosure of Information
+Your employment with us is contingent on the subject to successful clearance of background
+verification.
+You need to submit all relevant documents for background verification and the Company may,
+at any time, (or as part of the joining formalities) conduct reference/ background checks, reference
+check with previous employers, education qualifications, credit history as applicable, exclusion
+screening, criminal background, etc.).
+In the event the statements / particulars furnished by you at the time of joining are found to be false
+or misleading or any information is suppressed, or if the Company, during the course of the check
+receives any adverse report against you that may be detrimental to the interests of the Company,
+then the Company shall have the right to terminate your services forthwith without any notice
+period.
+5. Duties & Services
+You will be responsible to perform all the work assigned to you from time to time. You shall
+discharge your duties in a diligent, trustworthy, businesslike, and efficient manner. You will abide
+by the code of conduct, policies, procedures, rules and regulations stipulated from time to time by
+the Company. If required, the Company will provide the required training to you in updating your
+relevant knowledge for discharge of your duties efficiently and effectively, which will be as per
+the needs of business of the Company from time to time.
+You may be required to sign a separate agreement with the Company, should the Company send
+you for any training, deputation or any other assignment, either in India or abroad and you shall be
+strictly bound by the terms and conditions of any such agreement that you may sign.
 
-Regards,  
-HR Department  
-Slams edu tech
+
+6. Annual Review
+At the discretion of the Company, your performance and total compensation may be reviewed by
+the Company from time to time or annually as per the policy of the Company. If your performance
+is not found satisfactory, then the Company shall have the right to terminate your employment in
+accordance with the terms of the Company Policy.
+7. Personal Information
+The personal information you provide to the Company in connection with your recruitment and
+subsequent employment will be used for the purpose of administering your employment with the
+Company and the Company’s human resources generally. The Company may give out some of
+this information to other parties authorized by law to receive it. You have the right to access and
+correct any of your personal data in the Company’s possession. Any request for personal data
+access and/or correction should be addressed to the Human Resources Department. You shall keep
+the company informed of any change in your present or permanent address.
+8. Work Schedule
+Your working days and shift timings, including any changes therein, will be decided and informed
+to you by your supervisor. If you are required to work overtime and on holidays, you may be
+entitled to allowance in accordance with Company policy.
+
+9. Absence
+If you do not report for work for 3 or more consecutive working days without prior information to
+and approval of your supervisor, it will be considered as an act of indiscipline and dereliction of
+duty and will be dealt with as per disciplinary policy or code of conduct of Company.
+10. Standard of business conduct
+This Offer Letter contains some provisions of the Company's Code of Conduct and other Company
+policies and procedures. These may be amended by the Company from time to time. You agree
+that you will regularly visit the intranet of the Company and keep yourself current with the
+prevalent policies and procedures. You also agree to complete the various training sessions and
+training modules that the Company may want you to undergo.
+You may be required to sign a separate agreement with the Company, should the Company send
+you along with the Appointment letter and you shall be strictly bound by the terms and conditions
+of any such agreement that you may sign.
+11. Precedence
+In the event of any inconsistency between this Agreement and the Company’s Code of Conduct,
+policies, or procedures, as the case may be, the prevalent Code of Conduct, policies or procedures
+shall prevail.
+12. Governing Law and Jurisdiction
+This Agreement is made with reference to the law of India and the appropriate court in Kochi will
+be the jurisdiction for all legal governance.
+
+Provided that further details regarding employment terms, please refer to the Company’s
+Policies, in the Handbook which forms part of your service conditions and are subject to
+change from time to time.
+13. Miscellaneous
+
+1. Any claim relating to your employment with the Company shall be time-barred and
+not to be raised beyond six (6) months from your last working day with the
+Company and shall not be entertained unless applicable laws provide otherwise.
+2. You shall not pledge / use the Company’s name for personal purposes unless
+otherwise authorized by the Company.
+3. The Company shall not be responsible and liable for any actions or omissions
+committed or executed by you in your personal capacity or on your behalf within
+or outside the office premises. All liabilities arising out of such actions shall be
+your sole responsibility. You shall indemnify the Company against any claim
+arising out of your acts or omissions and also make good any loss or damages
+Company may be subject to.
+
+4. You shall not give or receive any gift /cash equivalent, in your official capacity
+representing the Company unless otherwise authorized by the Company.
+
+Sincerely,
+For Slams Edu Tech
+
+Aslam
+Managing Director Slams Edu Tech
+
+
+Acknowledgement:
+
+By signing, I confirm that I have read and completely understand the terms and conditions of this
+Offer Letter and agree to accept this offer of employment with Company.
+Please return a signed copy of this letter to confirm your offer of acceptance.
+
+Candidate Name:
+
+Candidate Signature:
+
+
 `,
 
   increment: (emp) => `
