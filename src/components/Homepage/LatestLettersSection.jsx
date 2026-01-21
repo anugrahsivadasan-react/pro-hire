@@ -68,8 +68,9 @@ export default function LatestLettersSection() {
       whileInView="visible"
       viewport={{ once: true }}
     >
+      
       <h2 className="text-3xl font-bold text-center text-gray-900 mb-20">
-        Latest Generated Letters
+        Latest <span className="text-[#faa302]"> Generated Letters</span>
       </h2>
 
       {/* Cards Grid */}

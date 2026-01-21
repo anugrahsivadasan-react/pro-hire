@@ -3,9 +3,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import UploadCV from "../components/UploadCV";
 import EmployeeForm from "../components/EmployeeForm";
-import LetterPreview from "../components/LetterPreview";
-import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
+import GeneratedLettersSection from "../components/Homepage/GeneratedLettersSection";
 // import {
 //   generateAppointmentLetter,
 
@@ -228,48 +227,19 @@ const Home = () => {
 
   <motion.div
     className="bg-white mt-24"
-        variants={itemVariants}>
+        variants={itemVariants}>  
 <LatestLettersSection/>
   </motion.div>
 
 
 
 
- {/* Letters + Buttons */}
-<LetterPreview
-  title="Appointment Letter"
-  text={letters.appointment}
-  bgImage={companyBackgrounds[selectedCompany]}
+<GeneratedLettersSection
+  letters={letters}
+  selectedCompany={selectedCompany}
+  companyBackgrounds={companyBackgrounds}
 />
 
-<PDFDownloadButton
-  text={letters.appointment}
-  fileName="Appointment_Letter.pdf"
-  bgImage={companyBackgrounds[selectedCompany]}
-/>
-
-
-      <LetterPreview
-        title="Offer Letter"
-        text={letters.offer}
-        bgImage={companyBackgrounds[selectedCompany]}
-      />
-      <PDFDownloadButton
-        text={letters.offer}
-        fileName="Offer_Letter.pdf"
-        bgImage={companyBackgrounds[selectedCompany]}
-      />
-
-      <LetterPreview
-        title="Increment Letter"
-        text={letters.increment}
-        bgImage={companyBackgrounds[selectedCompany]}
-      />
-      <PDFDownloadButton
-        text={letters.increment}
-        fileName="Increment_Letter.pdf"
-        bgImage={companyBackgrounds[selectedCompany]}
-      />
 
 
       {/* Mail Button */}
