@@ -6,48 +6,51 @@ import EmployeeForm from "../components/EmployeeForm";
 import LetterPreview from "../components/LetterPreview";
 import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
-import hr from "../assets/hr.png";
 // import {
 //   generateAppointmentLetter,
- 
+
 // } from "../templates/appointmentLetter";
 
 // import incrementLetter from "../templates/incrementLetter";
 // import offerLetter from "../templates/offerLetter";
-import { companyTemplates } from "../templates/companyTemplates";
 
-import bgImage from "../assets/slamslogo.jpeg";
-import { parseCV } from "../utils/cvParser";
+import { companyTemplates } from "../templates/companyTemplates";
+import Slams from "../assets/slamslogo.jpeg";
+import ziyaaaaBg from "../assets/logoHR.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import LatestLettersSection from "../components/Homepage/LatestLettersSection";
-import Slams from "../assets/slamslogo.jpeg";
-import ziyaaaaBg from "../assets/logoHR.png"; // add another +
+
 
 
 
 const Home = () => {
-  const [cvText, setCvText] = useState("");
-  const [user, setUser] = useState(null);
+  const [user] = useState(null);
 
-  //Animations
+  const scrollToTarget = () => {
+    const target = document.querySelector('.upload-cv-section');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
+  // Animations
   const { scrollYProgress } = useScroll();
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.2]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.6]);
- 
-  const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.6,
-    },
-  },
-};
 
-const itemVariants = {
-  hidden: { opacity: 0, x: 100 },
-  visible: { opacity: 1, x: 0 },
-};
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.6,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: 100 },
+    visible: { opacity: 1, x: 0 },
+  };
 
   const [employee, setEmployee] = useState({
     name: "",
@@ -64,53 +67,44 @@ const itemVariants = {
     increment: "",
   });
 
+  const [selectedCompany, setSelectedCompany] = useState("Ziya");
+
+  const companyBackgrounds = {
+    Ziya: ziyaaaaBg,
+    Slams: Slams,
+  };
+
   const updateLetters = () => {
-  const templates = companyTemplates[selectedCompany];
+    const templates = companyTemplates[selectedCompany];
+    if (!templates) return;
 
-  setLetters({
-    appointment: templates.appointment(employee),
-    offer: templates.offer(employee),
-    increment: templates.increment(employee),
-  });
-};
+    setLetters({
+      appointment: templates.appointment(employee),
+      offer: templates.offer(employee),
+      increment: templates.increment(employee),
+    });
+  };
 
-
-const companyBackgrounds = {
-  Ziya: ziyaaaaBg,
-  Slams: Slams,
-};
-
-const scrollToTarget = () => {
-  const target = document.getElementById("targetDiv");
-  if (target) {
-    target.scrollIntoView({ behavior: "smooth" });
-  }
-};
-
-
-  // ✅ CV Parser Handler
-const [selectedCompany, setSelectedCompany] = useState("Ziya");
-
+  // CV Parser Handler
   const handleCVParsed = (data) => {
-  console.log("Parsed CV Data:", data);
+    console.log("Parsed CV Data:", data);
+    setEmployee((prev) => ({
+      ...prev,
+      name: data.name || prev.name,
+      designation: data.designation || data.job_role || prev.designation,
+      email: data.email || prev.email,
+    }));
+  };
 
-  setEmployee((prev) => ({
-    ...prev,
-    name: data.name || prev.name,
-    designation: data.designation || data.job_role || prev.designation,
-    email: data.email || prev.email,
-  }));
-};
-
-
- 
   return (
+
     <div className="min-h-screen bg-gray-900 flex flex-col overflow-x-hidden ">
 
-          <div className="relative z-20">
-    <Navbar />
+      {/* Navbar */}
+      <div className="relative z-20">
+        <Navbar />
+      </div>
 
-  </div>
       {/* Banner Section */}
       <motion.div
         className="relative h-[700px] bg-cover bg-center overflow-hidden"
@@ -119,37 +113,36 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
           scale,
           opacity,
           willChange: "transform",
-          backfaceVisibility: "hidden"
-
+          backfaceVisibility: "hidden",
         }}
       >
-
-    
-
-        {/* Black overlay */} 
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black/50"></div>
+
         {/* Smooth fade into white */}
         
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-900 pointer-events-none"></div>
 
-       
 
         {/* Hero Content */}
         <section className="relative ml-[100px] flex flex-col items-start justify-center md:px-20 py-40 space-y-6 w-full md:w-1/2 z-10">
-          <h2 className="text-4xl md:text-7xl font-[900] text-white drop-shadow-sm flex-wrap">
+          <h2 className="text-4xl md:text-7xl font-[900] text-white drop-shadow-sm">
             Welcome to Pro-Hire{" "}
+
             <span className="text-[#faa302]">{user?.name || "Ziya Academy"}</span>!
           </h2>
           <p className="text-xl md:text-2xl text-white font-medium">
             Generate professional letters in seconds, not hours!!!
           </p>
           <button onClick={scrollToTarget} className="bg-[#faa302] hover:bg-[#71AEC1] text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold shadow-md transition-all duration-300">
+
             Generate letters
           </button>
         </section>
       </motion.div>
 
       {/* Workflow Heading */}
+
       <div className="flex-col justify-center text-center mt-20">
         <h1 className="text-[50px] text-white font-[800]">One Seamless Workflow</h1>
         <p className="text-[20px] font-[500] text-white ">
@@ -158,6 +151,7 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
       </div>
 
       {/* Step Indicator */}
+
      <motion.section
   className="py-16 px-4 text-center"
   variants={containerVariants}
@@ -179,74 +173,64 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
       >
         <div className="w-8 h-8 rounded-full bg-[#faa302] text-white flex items-center justify-center font-bold">
           {step.number}
+
         </div>
         <span>{step.label}</span>
       </motion.div>
     ))}
   </div>
-</motion.section>
+      </motion.section>
 
-      {/* UploadCV + EmployeeForm with staggered animation */}
-   <div className="w-full mx-auto px-4 space-y-10">
-  {/* UploadCV - Full Width */}
+      {/* Upload CV + Employee Form */}
+   <div className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto px-4 items-stretch">
+  
+  {/* Left Column */}
   <motion.div
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
-    className="w-full"
-  > 
-  <div id="targetDiv">
+    className="w-full md:w-1/2 flex flex-col gap-4 h-full"
+  >
     <UploadCV onCVParsed={handleCVParsed} />
+
+    <div>
+      <label className="font-semibold text-white">
+        Select Company
+      </label>
+
+      <select
+        value={selectedCompany}
+        onChange={(e) => setSelectedCompany(e.target.value)}
+        className="w-full border p-2 rounded-lg mt-1"
+      >
+        <option value="Ziya">Ziya Academy</option>
+        <option value="Slams">Slams Edu Tech</option>
+      </select>
     </div>
   </motion.div>
 
-  {/* EmployeeForm */}
-  
-  <div className="flex flex-col space-y-24">
-  {/* Tip box */}
-  <div className="bg-orange-50 border-l-4 flex items-center border-blue-400 p-4 rounded-xl text-md w-auto me-6 ms-[30px] text-gray-700">
-    💡 Tip: Filling accurate details helps generate error-free letters instantly.
-  </div>
+  {/* Right Column */}
+  <motion.div
+    initial={{ opacity: 0, x: 50 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8, delay: 0.3 }}
+    className="w-full md:w-1/2 flex h-full"
+  >
+    <EmployeeForm
+      data={employee}
+      setData={setEmployee}
+      onSubmit={updateLetters}
+    />
+  </motion.div>
 
-  {/* Illustration + EmployeeForm */}
-  <div className="flex flex-col md:flex-row gap-10 items-center">
-    {/* Illustration */}
-    <motion.div
-      initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
-      className="w-full md:w-1/2 flex justify-center"
-    >
-      <img
-        src={hr}
-        alt="Onboarding Illustration"
-        className="max-w-lg min-h-[400px] w-full"
-      />
-    </motion.div>
-
-    {/* EmployeeForm */}
-    <motion.div
-      initial={{ opacity: 0, x: 50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8, delay: 0.3 }}
-      className="w-full md:w-1/2"
-    >
-      <EmployeeForm
-        data={employee}
-        setData={setEmployee}
-        onSubmit={updateLetters}
-      />
-    </motion.div>
-  </div>
 </div>
-  
+
+
   <motion.div
     className="bg-white mt-24"
         variants={itemVariants}>
 <LatestLettersSection/>
   </motion.div>
-
-
 
 
 
@@ -264,30 +248,31 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
   bgImage={companyBackgrounds[selectedCompany]}
 />
 
-<LetterPreview
-  title="Offer Letter"
-  text={letters.offer}
-  bgImage={companyBackgrounds[selectedCompany]}
-/>
 
-<PDFDownloadButton
-  text={letters.offer}
-  fileName="Offer_Letter.pdf"
-  bgImage={companyBackgrounds[selectedCompany]}
-/>
+      <LetterPreview
+        title="Offer Letter"
+        text={letters.offer}
+        bgImage={companyBackgrounds[selectedCompany]}
+      />
+      <PDFDownloadButton
+        text={letters.offer}
+        fileName="Offer_Letter.pdf"
+        bgImage={companyBackgrounds[selectedCompany]}
+      />
 
-<LetterPreview
-  title="Increment Letter"
-  text={letters.increment}
-  bgImage={companyBackgrounds[selectedCompany]}
-/>
+      <LetterPreview
+        title="Increment Letter"
+        text={letters.increment}
+        bgImage={companyBackgrounds[selectedCompany]}
+      />
+      <PDFDownloadButton
+        text={letters.increment}
+        fileName="Increment_Letter.pdf"
+        bgImage={companyBackgrounds[selectedCompany]}
+      />
 
-<PDFDownloadButton
-  text={letters.increment}
-  fileName="Increment_Letter.pdf"
-  bgImage={companyBackgrounds[selectedCompany]}
-/>
 
+      {/* Mail Button */}
       {employee.email && (
         <div className="mt-4 text-center">
           <a
@@ -300,7 +285,6 @@ const [selectedCompany, setSelectedCompany] = useState("Ziya");
       )}
 
       <Footer />
-    </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+ import { motion } from "framer-motion";
 import React from "react";
 import { FaFileAlt, FaArrowUp, FaPercentage, FaBullhorn } from "react-icons/fa";
 

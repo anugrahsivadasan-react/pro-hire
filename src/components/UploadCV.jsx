@@ -10,7 +10,6 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
 
 export default function UploadCV({ onCVParsed }) {
   const [file, setFile] = useState(null);
-  const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
 
   const ref = useRef(null);
@@ -83,7 +82,7 @@ export default function UploadCV({ onCVParsed }) {
 
   return (
 
-    <section className="relative w-full max-w-7xl mb-24 mx-auto px-4 py-10">
+    <section className="relative w-full max-w-7xl  mx-auto px-4 py-1">
       {/* Upload Card with scroll-triggered animation */}
       <motion.div
         ref={ref}
