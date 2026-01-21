@@ -226,50 +226,62 @@ const Home = () => {
 </div>
 
 
-  <motion.div
-    className="bg-white mt-24"
-        variants={itemVariants}>
-<LatestLettersSection/>
-  </motion.div>
+  
 
 
 
 
  {/* Letters + Buttons */}
-<LetterPreview
-  title="Appointment Letter"
-  text={letters.appointment}
-  bgImage={companyBackgrounds[selectedCompany]}
-/>
+<div className="flex w-full">
+  {/* Appointment Letter */}
+  <div className="flex flex-col items-center w-1/3">
+    <LetterPreview
+      title="Appointment Letter"
+      text={letters.appointment}
+      bgImage={companyBackgrounds[selectedCompany]}
+    />
+    <PDFDownloadButton
+      text={letters.appointment}
+      fileName="Appointment_Letter.pdf"
+      bgImage={companyBackgrounds[selectedCompany]}
+    />
+  </div>
 
-<PDFDownloadButton
-  text={letters.appointment}
-  fileName="Appointment_Letter.pdf"
-  bgImage={companyBackgrounds[selectedCompany]}
-/>
+  {/* Offer Letter */}
+  <div className="flex flex-col items-center w-1/3">
+    <LetterPreview
+      title="Offer Letter"
+      text={letters.offer}
+      bgImage={companyBackgrounds[selectedCompany]}
+    />
+    <PDFDownloadButton
+      text={letters.offer}
+      fileName="Offer_Letter.pdf"
+      bgImage={companyBackgrounds[selectedCompany]}
+    />
+  </div>
 
+  {/* Increment Letter */}
+  <div className="flex flex-col items-center w-1/3">
+    <LetterPreview
+      title="Increment Letter"
+      text={letters.increment}
+      bgImage={companyBackgrounds[selectedCompany]}
+    />
+    <PDFDownloadButton
+      text={letters.increment}
+      fileName="Increment_Letter.pdf"
+      bgImage={companyBackgrounds[selectedCompany]}
+    />
+  </div>
+</div>
 
-      <LetterPreview
-        title="Offer Letter"
-        text={letters.offer}
-        bgImage={companyBackgrounds[selectedCompany]}
-      />
-      <PDFDownloadButton
-        text={letters.offer}
-        fileName="Offer_Letter.pdf"
-        bgImage={companyBackgrounds[selectedCompany]}
-      />
+<motion.div
+    className="bg-white mt-24"
+        variants={itemVariants}>
+<LatestLettersSection/>
+  </motion.div>
 
-      <LetterPreview
-        title="Increment Letter"
-        text={letters.increment}
-        bgImage={companyBackgrounds[selectedCompany]}
-      />
-      <PDFDownloadButton
-        text={letters.increment}
-        fileName="Increment_Letter.pdf"
-        bgImage={companyBackgrounds[selectedCompany]}
-      />
 
 
       {/* Mail Button */}

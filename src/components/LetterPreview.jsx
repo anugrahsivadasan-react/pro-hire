@@ -4,7 +4,7 @@ export default function LetterPreview({ title, text, bgImage }) {
   return (
     <div className="relative mt-8">
       {/* Card */}
-      <div className="bg-white/70 backdrop-blur-xl border border-gray-200 rounded-3xl shadow-2xl overflow-hidden transition hover:scale-[1.01]">
+      <div className="bg-white/70 min-w-[500px] max-w-[600px] backdrop-blur-xl border border-gray-200 rounded-3xl shadow-2xl overflow-hidden transition hover:scale-[1.01]">
         
         {/* Header */}
         <div className="px-6 py-4 border-b bg-gradient-to-r from-[#107594] to-cyan-500 text-white">
@@ -13,7 +13,7 @@ export default function LetterPreview({ title, text, bgImage }) {
 
         {/* Preview Area */}
         <div
-          className="relative p-8 min-h-[280px] bg-center bg-cover"
+          className="relative p-4 h-40 min-w-[500px] max-w-[600px] md:h-48 bg-center bg-cover"
           style={{ backgroundImage: `url(${bgImage})` }}
         >
           {/* Dark overlay for readability */}
