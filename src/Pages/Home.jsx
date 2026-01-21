@@ -7,7 +7,7 @@ import LetterPreview from "../components/LetterPreview";
 import PDFDownloadButton from "../components/PDFDownloadButton";
 import banner from "../assets/banner.jpg";
 import { companyTemplates } from "../templates/companyTemplates";
-import Slams from "../assets/slamslogo.jpeg";
+import Slams from "../assets/slamsbg.png";
 import ziyaaaaBg from "../assets/logoHR.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import LatestLettersSection from "../components/Homepage/LatestLettersSection";

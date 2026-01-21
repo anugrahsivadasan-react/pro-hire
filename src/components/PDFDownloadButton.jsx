@@ -6,33 +6,62 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
   const [pdfUrl, setPdfUrl] = useState(null);
 
   const generatePDF = () => {
-    const doc = new jsPDF();
-
-    if (bgImage) {
-      doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
-
-      doc.setFillColor(255, 255, 255);
-      doc.setGState(new doc.GState({ opacity: 0.85 }));
-      doc.rect(0, 0, 210, 297, "F");
-      doc.setGState(new doc.GState({ opacity: 1 }));
-    }
-
-    doc.setTextColor(0, 0, 0);
+    const doc = new jsPDF("p", "mm", "a4");
 
     const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    const marginTop = 65;
+    const marginBottom = 25;
+    const leftMargin = 20;
+    const lineHeight = 8;
+
+    let y = marginTop;
+
+    // const addBackground = () => {
+    //   if (bgImage) {
+    //     doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
+
+    //     doc.setFillColor(255, 255, 255);
+    //     doc.setGState(new doc.GState({ opacity: 0.85 }));
+    //     doc.rect(0, 0, 210, 297, "F");
+    //     doc.setGState(new doc.GState({ opacity: 1 }));
+    //   }
+    // };
+
+    const addBackground = () => {
+  if (bgImage) {
+    doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
+  }
+};
+
+
+    addBackground();
+    doc.setTextColor(0, 0, 0);
+
     const lines = text.split("\n");
-    let y = 35;
+
+    const checkPageBreak = () => {
+      if (y + lineHeight > pageHeight - marginBottom) {
+        doc.addPage();
+        addBackground();
+        y = marginTop;
+      }
+    };
 
     lines.forEach((rawLine) => {
       const line = rawLine.trim();
 
       if (!line) {
         y += 6;
+        checkPageBreak();
         return;
       }
 
+      // Title formatting
       if (
         line === "Appointment Letter" ||
+        line === "APPOINTMENT LETTER" ||
         line === "Offer Letter" ||
         line === "INCREMENT LETTER"
       ) {
@@ -40,6 +69,7 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
         doc.setFontSize(16);
         doc.text(line, pageWidth / 2, y, { align: "center" });
         y += 16;
+        checkPageBreak();
         return;
       }
 
@@ -61,8 +91,18 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
 
       doc.setFont(bold ? "Times-Bold" : "Times-Roman");
       doc.setFontSize(11);
-      doc.text(line, 20, y, { maxWidth: 170 });
-      y += 8;
+
+      const splitText = doc.splitTextToSize(line, 170);
+
+      splitText.forEach((txtLine) => {
+  doc.text(txtLine, leftMargin, y, {
+    maxWidth: 170,
+    align: "justify",
+  });
+  y += lineHeight;
+  checkPageBreak();
+});
+
     });
 
     return doc;
@@ -88,14 +128,14 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
   return (
     <>
       {/* Preview Button */}
-      <div className="pl-6 pt-2 ">
-      <button
-        type="button"
-        onClick={handlePreview}
-        className="bg-cyan-600 text-white px-5 py-2 pl-6 rounded-lg hover:bg-cyan-700 transition w-[200px]"
-      >
-        Preview Letter
-      </button>
+      <div className="pl-6 pt-2">
+        <button
+          type="button"
+          onClick={handlePreview}
+          className="bg-cyan-600 text-white px-5 py-2 pl-6 rounded-lg hover:bg-cyan-700 transition w-[200px]"
+        >
+          Preview Letter
+        </button>
       </div>
 
       {/* Modal */}
