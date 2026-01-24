@@ -63,29 +63,31 @@ export default function Navbar() {
 
   {/* Navigation Links */}
   <div className="hidden md:flex items-center gap-8 text-white font-dmsans text-[17px]">
-    <a
-      href="#upload"
-      className="hover:text-[#faa302] transition duration-200"
-    >
-      Upload CV
-    </a>
+    <Link
+  to="/home#generate"
+  className="hover:text-[#107594] transition"
+>
+  Upload CV
+</Link>
+    <Link
+  to="/home#view"
+  className="hover:text-[#107594] transition"
+>
+ Employee Details
+</Link>
+    <Link
+  to="/home#letter"
+  className="hover:text-[#107594] transition"
+>
+  Preview Letters
+</Link>
 
-    <a
-      href="#details"
-      className="hover:text-[#faa302] transition duration-200"
-    >
-      Employee Details
-    </a>
 
-    <a
-      href="#preview"
-      className="hover:text-[#faa302] transition duration-200"
-    >
-      Preview Letters
-    </a>
+    
 
     {/* Logout Button */}
     <button
+    onClick={handleLogout}
       className="
         bg-[#faa302]/90 
         hover:bg-[#faa302] 

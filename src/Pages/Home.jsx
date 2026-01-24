@@ -228,7 +228,7 @@ const opacity = useSpring(rawOpacity, {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       className="flex-col justify-center text-center mt-20"
-      id="generate">
+      id="view">
 
 
         <h1 className="text-[50px] text-white font-[800] font-poppins">
