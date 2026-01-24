@@ -1,12 +1,35 @@
 import React from "react";
+
 import LogoHR from "../assets/hr.png";
+
+
 import { ImExit } from "react-icons/im";
+import { Link } from "react-router-dom";
+
+
+import { useNavigate } from "react-router-dom";
+
+
+
 
 
 
 export default function Navbar() {
 
 
+
+
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear auth data if you have any
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    // Navigate to login page
+    navigate("/");
+  };
 
 
   return (
@@ -30,6 +53,7 @@ export default function Navbar() {
         className="w-full h-full object-contain"
       />
     </div>
+
 
     <h1 className="text-3xl font-poppins font-bold flex items-baseline gap-1 tracking-wide">
       <span className="text-[#faa302]">Pro</span>

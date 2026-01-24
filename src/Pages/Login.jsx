@@ -34,7 +34,7 @@ const Login = () => {
       if (remember) {
         localStorage.setItem('user', JSON.stringify(foundUser));
       }
-      navigate(foundUser.role === 'Ziya' ? '/dashboard' : '/sub-admin');
+      navigate(foundUser.role === 'Ziya' ? '/home' : '/sub-admin');
     } else {
       setError('Invalid username or password'); 
     }

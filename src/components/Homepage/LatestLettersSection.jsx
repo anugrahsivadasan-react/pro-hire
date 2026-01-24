@@ -112,8 +112,10 @@ export default function LatestLettersSection() {
       {/* View All Button */}
       <div className="mt-10 text-center">
         <a
+
           href="/letter-history"
           className="inline-block bg-[#faa302] mt-24 text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-transparent border border-[#faa302] transition  cursor-not-allowed opacity-70"
+
         >
           View All
         </a>
