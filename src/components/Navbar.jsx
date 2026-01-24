@@ -1,5 +1,5 @@
 import React from "react";
-import LogoHR from "../assets/logoHR.png";
+import LogoHR from "../assets/slams.png";
 import { ImExit } from "react-icons/im";
 
 export default function Navbar() {
