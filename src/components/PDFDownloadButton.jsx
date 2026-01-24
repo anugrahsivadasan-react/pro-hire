@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import jsPDF from "jspdf";
+import { createPortal } from "react-dom";
 
 export default function PDFPreviewButton({ text, fileName, bgImage }) {
   const [showPreview, setShowPreview] = useState(false);
@@ -12,29 +13,17 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
     const pageHeight = doc.internal.pageSize.getHeight();
 
     const marginTop = 65;
-    const marginBottom = 25;
+    const marginBottom = 35;
     const leftMargin = 20;
     const lineHeight = 8;
 
     let y = marginTop;
 
-    // const addBackground = () => {
-    //   if (bgImage) {
-    //     doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
-
-    //     doc.setFillColor(255, 255, 255);
-    //     doc.setGState(new doc.GState({ opacity: 0.85 }));
-    //     doc.rect(0, 0, 210, 297, "F");
-    //     doc.setGState(new doc.GState({ opacity: 1 }));
-    //   }
-    // };
-
     const addBackground = () => {
-  if (bgImage) {
-    doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
-  }
-};
-
+      if (bgImage) {
+        doc.addImage(bgImage, "PNG", 0, 0, 210, 297);
+      }
+    };
 
     addBackground();
     doc.setTextColor(0, 0, 0);
@@ -58,7 +47,6 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
         return;
       }
 
-      // Title formatting
       if (
         line === "Appointment Letter" ||
         line === "APPOINTMENT LETTER" ||
@@ -95,14 +83,13 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
       const splitText = doc.splitTextToSize(line, 170);
 
       splitText.forEach((txtLine) => {
-  doc.text(txtLine, leftMargin, y, {
-    maxWidth: 170,
-    align: "justify",
-  });
-  y += lineHeight;
-  checkPageBreak();
-});
-
+        doc.text(txtLine, leftMargin, y, {
+          maxWidth: 170,
+          align: "justify",
+        });
+        y += lineHeight;
+        checkPageBreak();
+      });
     });
 
     return doc;
@@ -121,68 +108,53 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
     doc.save(fileName);
   };
 
-  const handleSendMail = () => {
-    alert("Send mail functionality will be integrated here.");
-  };
-
   return (
     <>
-      {/* Preview Button */}
       <div className="pl-6 pt-2">
         <button
           type="button"
           onClick={handlePreview}
-          className="bg-cyan-600 text-white px-5 py-2 pl-6 rounded-lg hover:bg-cyan-700 transition w-[200px]"
+          className="border border-[#faa302] text-[#faa302] px-5 py-2 rounded-lg hover:bg-[#eb8f2c] hover:text-white transition w-full max-w-[170px]"
         >
           Preview Letter
         </button>
       </div>
 
-      {/* Modal */}
-      {showPreview && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-          <div className="bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-xl flex flex-col overflow-hidden">
-            
-            {/* Header */}
-            <div className="flex justify-between items-center px-6 py-4 border-b">
-              <h2 className="text-lg font-semibold">
-                Letter Preview — {fileName}
-              </h2>
-              <button
-                onClick={() => setShowPreview(false)}
-                className="text-gray-500 hover:text-red-500 text-xl"
-              >
-                ✕
-              </button>
-            </div>
+      {showPreview &&
+        createPortal(
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70">
+            <div className="bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-xl flex flex-col overflow-hidden">
+              <div className="flex justify-between items-center px-6 py-4 border-b">
+                <h2 className="text-lg font-semibold">
+                  Letter Preview — {fileName}
+                </h2>
+                <button
+                  onClick={() => setShowPreview(false)}
+                  className="text-gray-500 hover:text-red-500 text-xl"
+                >
+                  ✕
+                </button>
+              </div>
 
-            {/* PDF Preview */}
-            <div className="flex-1 bg-gray-100">
-              <iframe
-                src={pdfUrl}
-                title="PDF Preview"
-                className="w-full h-full"
-              />
-            </div>
+              <div className="flex-1 bg-gray-100">
+                <iframe src={pdfUrl} className="w-full h-full" />
+              </div>
 
-            {/* Actions */}
-            <div className="flex justify-end gap-3 px-6 py-4 border-t">
-              <button
-                onClick={handleSendMail}
-                className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100"
-              >
-                Send via Email
-              </button>
-              <button
-                onClick={handleDownload}
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-              >
-                Download {fileName}
-              </button>
+              <div className="flex justify-end gap-3 px-6 py-4 border-t">
+                <button className="px-4 py-2 rounded-lg border text-blue-900 hover:text-[#faa302] border-[#faa302] hover:bg-gray-100">
+                  Send via Email
+                </button>
+                <button
+                  onClick={handleDownload}
+                  className="bg-[#faa302]  text-white px-4 py-2 rounded hover:bg-blue-700"
+                >
+                  Download {fileName}
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.getElementById("modal-root")
+        )}
     </>
   );
 }
