@@ -57,12 +57,12 @@ Agreement.
 Your initial place of posting will be at Aluva,Kochi. However, the management reserves the right to transfer
 you to any of its branches, departments, associate companies, or client sites within India.
 4. Working Hours
-Your normal working hours shall be from 9:30 AM to 6:00 PM, [Days of Week]. However, you
+Your normal working hours shall be from 9:30 AM to 6:00 PM. However, you
 may be required to work beyond these hours depending on business needs.
 5. Probation
-You will be on probation for a period of [6 months / as per company policy] from the date of joining.
+You will be on probation for a period of 6 months / as per company policy from the date of joining.
 Based on your performance, conduct, and suitability, your services may be confirmed in writing. During
-probation, either party may terminate the employment by giving [30 days] notice or salary in lieu thereof.
+probation, either party may terminate the employment by giving 30 days notice or salary in lieu thereof.
 6. Termination
 a. Termination for breach of Code of Conduct
 The Company may terminate this Agreement at any time for breach of Code of Conduct with immediate
@@ -111,7 +111,7 @@ days] from your last working day.
 7. Notice Period
 • During probation, either party may terminate this employment by giving [30 days] written notice
 or salary in lieu thereof.
-• After confirmation, either party may terminate this employment by giving [_days] written notice
+• After confirmation, either party may terminate this employment by giving 45 days written notice
 or salary in lieu thereof.
 • Resignation Process Notice Period: You must give at least 30 days’ written notice if you decide
 to resign.
@@ -158,7 +158,7 @@ Policies, which form part of your service conditions and are subject to change f
 
 For Ziya Academy Pvt.Ltd
 Authorized Signatory
-
+   
 
 Name:
 Designation:
