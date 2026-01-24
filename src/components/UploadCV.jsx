@@ -82,7 +82,7 @@ export default function UploadCV({ onCVParsed }) {
 
   return (
 
-    <section className="relative w-full max-w-7xl  mx-auto px-4 py-1">
+    <section className="relative w-full h-[600px] max-w-7xl  mx-auto px-4 py-1">
       {/* Upload Card with scroll-triggered animation */}
       <motion.div
         ref={ref}

@@ -9,9 +9,10 @@ import PDFDownloadButton from "../components/PDFDownloadButton";
 import { companyTemplates } from "../templates/companyTemplates";
 import Slams from "../assets/slamsbg.png";
 import ziyaaaaBg from "../assets/ziyaBG.png";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import LatestLettersSection from "../components/Homepage/LatestLettersSection";
 import LetterPreview from "../components/LetterPreview";
+
 
 const Home = () => {
   const [user] = useState(null);
@@ -25,8 +26,19 @@ const Home = () => {
 
   // Animations
   const { scrollYProgress } = useScroll();
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.2]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.6]);
+  const rawScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+const scale = useSpring(rawScale, {
+  stiffness: 60,
+  damping: 20,
+  mass: 0.2,
+});
+
+const rawOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+const opacity = useSpring(rawOpacity, {
+  stiffness: 60,
+  damping: 20,
+  mass: 0.2,
+});
 
   const containerVariants = {
     hidden: {},
@@ -104,8 +116,8 @@ const Home = () => {
       </div>
 
       {/* Banner Section */}
-     <motion.div
-  className="relative h-[900px] bg-cover bg-center overflow-hidden flex items-center"
+    <motion.div
+  className="relative h-[900px] w-full bg-cover bg-center overflow-hidden flex items-center"
   style={{
     backgroundImage: `url(${banner})`,
     scale,
@@ -118,8 +130,7 @@ const Home = () => {
   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-900 pointer-events-none"></div>
 
   {/* Hero Content */}
-  <section className="relative z-10 max-w-3xl ml-[80px] space-y-8">
-    
+<section className="relative z-10 max-w-3xl px-6 md:px-20 lg:px-32 space-y-8">    
     <motion.h2
       initial={{ opacity: 0, y: 40, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -195,7 +206,12 @@ const Home = () => {
 </motion.div>
 
       {/* Workflow Heading */}
-      <div className="flex-col justify-center text-center mt-20">
+      <motion.div 
+       initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      className="flex-col justify-center text-center mt-20">
         <h1 className="text-[50px] text-white font-[800] font-poppins">
           One Seamless Workflow
         </h1>
@@ -203,7 +219,7 @@ const Home = () => {
           Generate Offers, Appointments, and promotion letters in a streamlined,
           efficient process.
         </p>
-      </div>
+      </motion.div>
 
       {/* Step Indicator */}
       <motion.section
@@ -213,7 +229,7 @@ const Home = () => {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl font-bold text-[#faa302] mb-8 font-poppins">
+        <h2 className="text-3xl font-bold text-[#faa302] mb-8 mt-10 font-poppins">
           Your 3-Step Workflow
         </h2>
 
@@ -237,62 +253,75 @@ const Home = () => {
         </div>
       </motion.section>
 
-      {/* Upload CV + Employee Form */}
-      <div className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto px-4 items-stretch">
-        {/* Left Column */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="w-full md:w-1/2 flex flex-col gap-4 h-full"
+    {/* Upload CV + Employee Form */}
+<div className="max-w-6xl mx-auto px-4">
+
+  {/* Two Cards Side-by-Side */}
+  <div className="flex flex-col md:flex-row gap-10 items-stretch">
+
+    {/* Left Column */}
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="w-full md:w-1/2 flex flex-col gap-4"
+    >
+      <UploadCV id="upload-cv-section" onCVParsed={handleCVParsed} />
+    </motion.div>
+
+    {/* Right Column */}
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}   // SAME ANIMATION
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      className="w-full md:w-1/2 flex"
+    >
+      <EmployeeForm
+        data={employee}
+        setData={setEmployee}
+        onSubmit={updateLetters}
+      />
+    </motion.div>
+
+  </div>
+
+  {/* Full-Width Dropdown Below Both Cards */}
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, delay: 0.3 }}
+    className="mt-8 w-full"
+  >
+    <label className="block text-sm font-semibold text-white mb-2 font-dmsans">
+      Select Company
+    </label>
+
+    <div className="relative">
+      <select
+        value={selectedCompany}
+        onChange={(e) => setSelectedCompany(e.target.value)}
+        className="w-full appearance-none bg-gray-800 text-white px-4 py-3 rounded-xl border border-gray-600 
+        focus:outline-none focus:ring-2 focus:ring-[#faa302] focus:border-[#faa302] transition duration-200 font-dmsans"
+      >
+        <option value="Ziya">Ziya Academy</option>
+        <option value="Slams">Slams Edu Tech</option>
+      </select>
+
+      <span className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+        <svg
+          className="w-5 h-5 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
         >
-          <UploadCV id="upload-cv-section" onCVParsed={handleCVParsed} />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </span>
+    </div>
+  </motion.div>
 
-          <div className="w-full">
-            <label className="block text-sm font-semibold text-white mb-2 font-dmsans">
-              Select Company
-            </label>
-
-            <div className="relative">
-              <select
-                value={selectedCompany}
-                onChange={(e) => setSelectedCompany(e.target.value)}
-                className="w-full appearance-none bg-gray-800 text-white px-4 py-3 rounded-xl border border-gray-600 
-                 focus:outline-none focus:ring-2 focus:ring-[#faa302] focus:border-[#faa302] transition duration-200 font-dmsans"
-              >
-                <option value="Ziya">Ziya Academy</option>
-                <option value="Slams">Slams Edu Tech</option>
-              </select>
-
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Right Column */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-full md:w-1/2 flex h-full"
-        >
-          <EmployeeForm
-            data={employee}
-            setData={setEmployee}
-            onSubmit={updateLetters}
-          />
-        </motion.div>
-      </div>
+</div>
 
       {/* Generated Letters */}
       <GeneratedLettersSection
@@ -302,9 +331,8 @@ const Home = () => {
       />
 
       {/* Latest Letters */}
-      <motion.div className="bg-white mt-24" variants={itemVariants}>
         <LatestLettersSection />
-      </motion.div>
+      
 
       {/* Mail Button */}
       {employee.email && (

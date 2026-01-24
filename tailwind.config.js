@@ -23,7 +23,9 @@ export default {
       '50%': { borderColor: 'rgba(250,163,2,0.6)' },
       '100%': { borderColor: 'rgba(250,163,2,0.2)' },
     },
+    
   },
+  
   animation: {
     shine: 'shine 3s linear infinite',
     reverseShine: 'reverseShine 3s linear infinite',
