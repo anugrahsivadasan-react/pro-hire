@@ -6,14 +6,11 @@ const ziyaTemplates = {
 To,
  ${emp.name},
  
- 
  Subject: Appointment letter for the Position of ${emp.designation}
-
-
-Dear  ${emp.name},
+ Dear  ${emp.name},
 
 We are pleased to inform you that you have been appointed as ${emp.designation} in Ziya Academy Pvt.
-Ltd., [Address of the Company].
+Ltd.Muppathadom Junction Opposite Surya Opticals Muppathadom Edayar Aluva.
 You are hereby asked to join from ${emp.joiningDate}.
 As a ${emp.designation} you are required to undertake all duties and activities as assigned to you by the
 company. Your monthly gross salary will be [Salary Amount], payable as per the company's standard
@@ -26,8 +23,7 @@ and shall confirm your employment in the company.
 EMPLOYMENT AGREEMENT
 
 This Employment Agreement is by and between Ziya Academy Pvt.Ltd and  ${emp.name},
-, and is
-effective from the Employee’s date of joining with the Company and not later than ${emp.joiningDate} and is
+, and is effective from the Employee’s date of joining with the Company and not later than ${emp.joiningDate} and is
 made with reference to the following.
 The Company desires to employ the services of the Employee, and the Employee is willing to be so
 employed by the Company.
@@ -156,13 +152,21 @@ jurisdiction for all legal governance.
 Provided that further details regarding employment terms, please refer to the Company’s
 Policies, which form part of your service conditions and are subject to change from time to time.
 
-For Ziya Academy Pvt.Ltd
+For Ziya Academy
 Authorized Signatory
    
+Name: Muhammed Fayas
+Designation: HR Manager
 
-Name:
-Designation:
+Employee Acknowledgement
+I, ${emp.name} hereby certify that I have gone through and understood all the terms and conditions
+mentioned above (including the matters provided in the handbook) and accept and agree to abide by them by
+signing and sending as the scanned copy of the Appointment letter.
+Name of the Employee:${emp.name}
+Signature of Employee:
 
+Date:
+Place:Aluva Muppathadom
 `,
 
   offer: (emp) => `
@@ -295,15 +299,16 @@ Aslam
 Managing Director Ziya Academy
 
 
-Acknowledgement:
+Employee Acknowledgement
+I, ${emp.name} hereby certify that I have gone through and understood all the terms and conditions
+mentioned above (including the matters provided in the handbook) and accept and agree to abide by them by
+signing and sending as the scanned copy of the Offer letter.
 
-By signing, I confirm that I have read and completely understand the terms and conditions of this
-Offer Letter and agree to accept this offer of employment with Company.
-Please return a signed copy of this letter to confirm your offer of acceptance.
+Name of the Employee:${emp.name}
+Signature of Employee:
 
-Candidate Name:
-
-Candidate Signature:
+Date:
+Place:Aluva Muppathadom
 
 
 `,
@@ -348,7 +353,7 @@ To,
 Dear  ${emp.name},
 
 We are pleased to inform you that you have been appointed as ${emp.designation} in Ziya Academy Pvt.
-Ltd., [Address of the Company].
+Ltd., Muppathadom Junction Opposite Surya Opticals Muppathadom Edayar Aluva.
 You are hereby asked to join from ${emp.joiningDate}.
 As a ${emp.designation} you are required to undertake all duties and activities as assigned to you by the
 company. Your monthly gross salary will be [Salary Amount], payable as per the company's standard
@@ -361,8 +366,7 @@ and shall confirm your employment in the company.
 EMPLOYMENT AGREEMENT
 
 This Employment Agreement is by and between Slams Edu Tech and  ${emp.name},
-, and is
-effective from the Employee’s date of joining with the Company and not later than ${emp.joiningDate} and is
+, and is effective from the Employee’s date of joining with the Company and not later than ${emp.joiningDate} and is
 made with reference to the following.
 The Company desires to employ the services of the Employee, and the Employee is willing to be so
 employed by the Company.
@@ -494,9 +498,20 @@ Policies, which form part of your service conditions and are subject to change f
 For Slams Edu Tech
 Authorized Signatory
 
+Name: Muhammed Fayas
+Designation:HR Manager
 
-Name:
-Designation:
+
+Employee Acknowledgement
+I, ${emp.name} hereby certify that I have gone through and understood all the terms and conditions
+mentioned above (including the matters provided in the handbook) and accept and agree to abide by them by
+signing and sending as the scanned copy of the Appointment letter.
+
+Name of the Employee:${emp.name}
+Signature of Employee:
+
+Date:
+Place:Aluva Muppathadom
 
 `,
 
@@ -630,15 +645,16 @@ Aslam
 Managing Director Slams Edu Tech
 
 
-Acknowledgement:
+Employee Acknowledgement
+I, ${emp.name} hereby certify that I have gone through and understood all the terms and conditions
+mentioned above (including the matters provided in the handbook) and accept and agree to abide by them by
+signing and sending as the scanned copy of the offer letter.
 
-By signing, I confirm that I have read and completely understand the terms and conditions of this
-Offer Letter and agree to accept this offer of employment with Company.
-Please return a signed copy of this letter to confirm your offer of acceptance.
+Name of the Employee:${emp.name}
+Signature of Employee:
 
-Candidate Name:
-
-Candidate Signature:
+Date:
+Place:Aluva Muppathadom
 
 
 `,
