@@ -1,6 +1,7 @@
 import React from "react";
 import LogoHR from "../assets/slams.png";
 import { ImExit } from "react-icons/im";
+import { Link } from "react-router-dom";
 
 
 import { useNavigate } from "react-router-dom";
@@ -40,9 +41,25 @@ export default function Navbar() {
 
       {/* Navigation Links */}
       <div className="hidden md:flex items-center gap-6 text-white font-medium">
-        <a href="#upload" className="hover:text-[#107594] transition">Upload CV</a>
-        <a href="#details" className="hover:text-[#107594] transition">Employee Details</a>
-        <a href="#preview" className="hover:text-[#107594] transition">Preview Letters</a>
+<Link
+  to="/home#generate"
+  className="hover:text-[#107594] transition"
+>
+  Upload CV
+</Link>
+<Link
+  to="/home#generate"
+  className="hover:text-[#107594] transition"
+>
+  Employee Details
+</Link>
+<Link
+  to="/home#letter"
+  className="hover:text-[#107594] transition"
+>
+  Preview Letters
+</Link>
+       
          <div>
         <button
           href="#generate"

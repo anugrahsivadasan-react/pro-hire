@@ -12,9 +12,20 @@ import ziyaaaaBg from "../assets/ziyaBG.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import LatestLettersSection from "../components/Homepage/LatestLettersSection";
 import LetterPreview from "../components/LetterPreview";
+import { useLocation } from "react-router-dom";
+
 
 const Home = () => {
   const [user] = useState(null);
+
+   const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.querySelector(hash);
+      element?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [hash]);
 
   const scrollToTarget = () => {
     const target = document.querySelector(".upload-cv-section");
@@ -140,8 +151,11 @@ const Home = () => {
     </p>
 
     <button
-      onClick={scrollToTarget}
-      className="
+ onClick={() => {
+    document.getElementById("generate")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }}      className="
         relative overflow-hidden ripple
         px-6 md:px-8 py-3 md:py-4
         rounded-xl
@@ -196,7 +210,7 @@ const Home = () => {
 </motion.div>
 
       {/* Workflow Heading */}
-      <div className="flex-col justify-center text-center mt-20">
+      <div id="generate" className="flex-col justify-center text-center mt-20">
         <h1 className="text-[50px] text-white font-[800] font-poppins">
           One Seamless Workflow
         </h1>
@@ -239,7 +253,7 @@ const Home = () => {
       </motion.section>
 
       {/* Upload CV + Employee Form */}
-      <div className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto px-4 items-stretch">
+      <div  className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto px-4 items-stretch">
         {/* Left Column */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -296,11 +310,13 @@ const Home = () => {
       </div>
 
       {/* Generated Letters */}
+      <div id="letter" className="mt">
       <GeneratedLettersSection
         letters={letters}
         selectedCompany={selectedCompany}
         companyBackgrounds={companyBackgrounds}
       />
+      </div>
 
       {/* Latest Letters */}
       <motion.div className="bg-white mt-24" variants={itemVariants}>
