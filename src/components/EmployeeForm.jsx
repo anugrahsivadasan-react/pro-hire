@@ -26,7 +26,6 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
     }
   };
 
-  console.log("Employee Form Data:", data);
 
   return (
     <motion.section

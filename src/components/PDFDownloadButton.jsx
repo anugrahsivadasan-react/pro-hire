@@ -47,45 +47,57 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
         return;
       }
 
+
       if (
-        line === "Appointment Letter" ||
         line === "APPOINTMENT LETTER" ||
-        line === "Offer Letter" ||
-        line === "INCREMENT LETTER"
+        line === "OFFER LETTER" ||
+        line === "INCREMENT LETTER" ||
+        line === "EMPLOYMENT AGREEMENT"
       ) {
         doc.setFont("Times-Bold");
         doc.setFontSize(16);
         doc.text(line, pageWidth / 2, y, { align: "center" });
-        y += 16;
+        y += 14;
         checkPageBreak();
         return;
       }
 
-      const bold =
-        line.startsWith("Dear") ||
-        line.startsWith("Department:") ||
-        line.startsWith("Salary:") ||
-        line.startsWith("Offered Salary:") ||
-        line.startsWith("Joining date:") ||
-        line.startsWith("Start Date:") ||
-        line.startsWith("Your revised salary") ||
-        line.startsWith("Effective from") ||
-        line === "Best regards," ||
-        line === "Warm Regards," ||
-        line === "HR Team" ||
-        line === "HR Department" ||
-        line === "Finance Department" ||
-        line === "Ziya Academy LLP";
+      // SUB HEADINGS (LEFT + BOLD)
+      const subHeadingPatterns = [
+        /^Subject:/i,
+        /^Dear/i,
+        /^[0-9]+\./,
+        /^EMPLOYMENT AGREEMENT/i,
+        /^For /i,
+        /^Authorized Signatory/i,
+        /^Date:/i,
+        /^Salary/i,
+        /^Joining Date/i,
+        /^Effective/i,
+        /^Revised Salary/i,
+        /^Best Regards/i,
+        /^Warm Regards/i,
+        /^Sincerely/i,
+        /^Acknowledgement/i,
+        /^HR/i,
+        /^Ziya Academy/i,
+        /^Slams/i
+      ];
 
-      doc.setFont(bold ? "Times-Bold" : "Times-Roman");
-      doc.setFontSize(11);
+      const isSubHeading = subHeadingPatterns.some((pattern) =>
+        pattern.test(line)
+      );
+
+      doc.setFont(isSubHeading ? "Times-Bold" : "Times-Roman");
+      doc.setFontSize(isSubHeading ? 15 : 11);
 
       const splitText = doc.splitTextToSize(line, 170);
 
       splitText.forEach((txtLine) => {
         doc.text(txtLine, leftMargin, y, {
           maxWidth: 170,
-          align: "justify",
+
+          align: isSubHeading ? "left" : "justify",
         });
         y += lineHeight;
         checkPageBreak();
@@ -120,6 +132,7 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
         </button>
       </div>
 
+
       {showPreview &&
         createPortal(
           <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70">
@@ -151,7 +164,7 @@ export default function PDFPreviewButton({ text, fileName, bgImage }) {
                   Download {fileName}
                 </button>
               </div>
-            </div>
+====        </div>
           </div>,
           document.getElementById("modal-root")
         )}

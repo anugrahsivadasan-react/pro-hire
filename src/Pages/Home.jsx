@@ -13,6 +13,7 @@ import PDFDownloadButton from "../components/PDFDownloadButton";
 
 // import incrementLetter from "../templates/incrementLetter";
 // import offerLetter from "../templates/offerLetter";
+import LetterPreview from "../components/LetterPreview";
 
 import { companyTemplates } from "../templates/companyTemplates";
 import Slams from "../assets/slamsbg.png";
@@ -21,15 +22,21 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import LatestLettersSection from "../components/Homepage/LatestLettersSection";
 import LetterPreview from "../components/LetterPreview";
 
-
-
-
 const Home = () => {
   const [user] = useState(null);
   
 
+<<<<<<< HEAD
 
   
+=======
+  const scrollToTarget = () => {
+    const target = document.querySelector(".upload-cv-section");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+>>>>>>> ad92c36e67851a2b9ede6b59ef1a790285d584a5
 
   // Animations
   const { scrollYProgress } = useScroll();
@@ -72,7 +79,12 @@ const Home = () => {
     Slams: Slams,
   };
 
+<<<<<<< HEAD
     useEffect(() => {
+=======
+  // 🔴 useEffect should be placed HERE
+  useEffect(() => {
+>>>>>>> ad92c36e67851a2b9ede6b59ef1a790285d584a5
   updateLetters();
 }, [
   selectedCompany,
@@ -116,9 +128,7 @@ const Home = () => {
 
 
   return (
-
-    <div className="min-h-screen bg-gray-900 flex flex-col overflow-x-hidden ">
-
+    <div className="min-h-screen bg-gray-900 flex flex-col overflow-x-hidden">
       {/* Navbar */}
       <div className="relative z-20">
         <Navbar />
@@ -135,12 +145,9 @@ const Home = () => {
           backfaceVisibility: "hidden",
         }}
       >
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/50"></div>
-
-        {/* Smooth fade into white */}
-        
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-900 pointer-events-none"></div>
+
 
 
         {/* Hero Content */}
@@ -161,49 +168,53 @@ const Home = () => {
     Generate letters
   </button>
 </section>
+
       </motion.div>
 
       {/* Workflow Heading */}
-
       <div className="flex-col justify-center text-center mt-20">
-        <h1 className="text-[50px] text-white font-[800]">One Seamless Workflow</h1>
-        <p className="text-[20px] font-[500] text-white ">
-          Generate Offers, Appointments, and promotion letters in a streamlined, efficient process.
+        <h1 className="text-[50px] text-white font-[800]">
+          One Seamless Workflow
+        </h1>
+        <p className="text-[20px] font-[500] text-white">
+          Generate Offers, Appointments, and promotion letters in a streamlined,
+          efficient process.
         </p>
       </div>
 
       {/* Step Indicator */}
-
-     <motion.section
-  className="py-16 px-4 text-center"
-  variants={containerVariants}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
->
-  <h2 className="text-3xl font-bold text-[#faa302] mb-8">Your 3-Step Workflow</h2>
-  <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-white font-medium">
-    {[
-      { number: "1", label: "Upload CV ->" },
-      { number: "2", label: "Fill Employee Details  ->" },
-      { number: "3", label: "Generate Letters " },
-    ].map((step, i) => (
-      <motion.div
-        key={i}
-        variants={itemVariants}
-        className="flex items-center gap-2"
+      <motion.section
+        className="py-16 px-4 text-center"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
       >
-        <div className="w-8 h-8 rounded-full bg-[#faa302] text-white flex items-center justify-center font-bold">
-          {step.number}
-
+        <h2 className="text-3xl font-bold text-[#faa302] mb-8">
+          Your 3-Step Workflow
+        </h2>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-white font-medium">
+          {[
+            { number: "1", label: "Upload CV ->" },
+            { number: "2", label: "Fill Employee Details  ->" },
+            { number: "3", label: "Generate Letters " },
+          ].map((step, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              className="flex items-center gap-2"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#faa302] text-white flex items-center justify-center font-bold">
+                {step.number}
+              </div>
+              <span>{step.label}</span>
+            </motion.div>
+          ))}
         </div>
-        <span>{step.label}</span>
-      </motion.div>
-    ))}
-  </div>
       </motion.section>
 
       {/* Upload CV + Employee Form */}
+
    <div className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto px-4 items-stretch">
   
   {/* Left Column */}
@@ -264,6 +275,8 @@ const Home = () => {
 
 </div>
 
+
+     
 
 
   
