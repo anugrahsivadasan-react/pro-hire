@@ -49,6 +49,7 @@ const Home = () => {
     department: "",
     joiningDate: "",
     email: "",
+    address:"",
   });
 
   const [letters, setLetters] = useState({
@@ -73,6 +74,7 @@ const Home = () => {
     employee.salary,
     employee.department,
     employee.joiningDate,
+    employee.address
   ]);
   const updateLetters = () => {
     const templates = companyTemplates[selectedCompany];

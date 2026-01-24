@@ -19,7 +19,7 @@ export default function Navbar() {
     localStorage.removeItem("user");
 
     // Navigate to login page
-    navigate("/login");
+    navigate("/");
   };
   return (
     <nav className="w-full bg-gray-900 shadow-2xl px-6 md:px-12 py-4 flex items-center justify-between text-[#faa302]">

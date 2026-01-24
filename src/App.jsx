@@ -12,7 +12,7 @@ function App() {
             <ToastContainer position="top-right" autoClose={3000} />
 
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

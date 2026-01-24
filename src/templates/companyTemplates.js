@@ -8,6 +8,7 @@ To,
  
  Subject: Appointment letter for the Position of ${emp.designation}
  Dear  ${emp.name},
+ ${emp.address}
 
 We are pleased to inform you that you have been appointed as ${emp.designation} in Ziya Academy Pvt.
 Ltd.Muppathadom Junction Opposite Surya Opticals Muppathadom Edayar Aluva.
@@ -176,6 +177,7 @@ OFFER LETTER
 Subject: Offer of Employment
 
 Dear ${emp.name},
+ ${emp.address},
 We are delighted to extend to you an offer for the position of ${emp.designation} at Ziya
 Academy. We were truly impressed with your skills and background, and we believe you will be
 a valuable addition to our team.
@@ -345,12 +347,10 @@ const SlamsTemplates = {
                                           Date: ${new Date().toLocaleDateString()}
 To,
  ${emp.name},
- 
+  ${emp.address},
  
  Subject: Appointment letter for the Position of ${emp.designation}
-
-
-Dear  ${emp.name},
+ Dear  ${emp.name},
 
 We are pleased to inform you that you have been appointed as ${emp.designation} in Ziya Academy Pvt.
 Ltd., Muppathadom Junction Opposite Surya Opticals Muppathadom Edayar Aluva.
@@ -522,6 +522,8 @@ OFFER LETTER
 Subject: Offer of Employment
 
 Dear ${emp.name},
+${emp.address},
+
 We are delighted to extend to you an offer for the position of ${emp.designation} at Slams Edu Tech
 . We were truly impressed with your skills and background, and we believe you will be
 a valuable addition to our team.
