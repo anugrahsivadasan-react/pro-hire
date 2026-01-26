@@ -46,7 +46,7 @@ export default function UploadCV({ onCVParsed }) {
     formData.append("file", f);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/parse-resume", {
+      const res = await fetch("https://pro-hire.onrender.com", {
         method: "POST",
         body: formData,
       });

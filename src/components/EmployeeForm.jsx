@@ -12,7 +12,7 @@ export default function EmployeeForm({ data, setData, onSubmit }) {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/submit-employee", {
+      const res = await fetch("https://pro-hire.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
