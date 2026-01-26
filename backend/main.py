@@ -2,7 +2,7 @@
 # Run with:
 # python -m venv venv
 # venv\Scripts\activate
-#  uvicorn main:app --reload
+# uvicorn main:app --reload
 
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,11 +20,13 @@ import fitz  # PyMuPDF
 app = FastAPI()
 
 # Enable CORS for React frontend
+# 🔹 Updated: include frontend URL correctly (no trailing slash)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://pro-hire-ziya.vercel.app/"],  # change to frontend URL in production
+    allow_origins=["https://pro-hire-ziya.vercel.app"],  # frontend URL
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=True,
 )
 
 # Load NLP model
@@ -53,7 +55,7 @@ def extract_text(file_path: str):
     return ""
 
 
-# ---------------- NORMALIZATION (FROM FIRST CODE) ----------------
+# ---------------- NORMALIZATION ----------------
 def collapse_spaced_words(text: str):
     # Converts: D E V E L O P E R → DEVELOPER
     return re.sub(
@@ -69,7 +71,7 @@ def normalize_text(line: str):
     return line.strip()
 
 
-# ---------------- EMAIL EXTRACTION (FROM FIRST CODE) ----------------
+# ---------------- EMAIL EXTRACTION ----------------
 def extract_email_from_links(pdf_path: str):
     try:
         doc = fitz.open(pdf_path)
@@ -103,7 +105,7 @@ def extract_email(text: str, file_path: str):
     return None
 
 
-# ---------------- PHONE EXTRACTION (FROM FIRST CODE) ----------------
+# ---------------- PHONE EXTRACTION ----------------
 def extract_phone(text: str):
     for match in phonenumbers.PhoneNumberMatcher(text, "IN"):
         return phonenumbers.format_number(
@@ -113,7 +115,7 @@ def extract_phone(text: str):
     return None
 
 
-# ---------------- JOB ROLE EXTRACTION (FROM FIRST CODE) ----------------
+# ---------------- JOB ROLE EXTRACTION ----------------
 def extract_job_role(text: str):
     lines = [normalize_text(l) for l in text.split("\n") if l.strip()]
 
@@ -171,7 +173,7 @@ def normalize_job_role(role, text):
     return role
 
 
-# ---------------- NAME EXTRACTION (FROM FIRST CODE) ----------------
+# ---------------- NAME EXTRACTION ----------------
 def extract_name(text: str):
     lines = [normalize_text(l) for l in text.split("\n") if l.strip()]
 
