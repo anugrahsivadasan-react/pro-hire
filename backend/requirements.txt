@@ -5,3 +5,4 @@ python-docx
 spacy
 phonenumbers
 PyMuPDF
+python-multipart
