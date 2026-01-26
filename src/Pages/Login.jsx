@@ -23,6 +23,7 @@ const Login = () => {
 
     const dummyUser = [
       { email: 'super@example.com', password: '12345', role: 'Ziya' },
+      { email: 'HR ziya', password: '12345', role: 'Ziya' },
       { email: 'sub@example.com', password: '12345', role: 'Ziyaaaa' },
     ];
 
