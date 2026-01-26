@@ -153,7 +153,7 @@ const opacity = useSpring(rawOpacity, {
       }}
       className="text-4xl md:text-7xl font-[900] font-poppins text-white drop-shadow-sm leading-tight"
     >
-      Welcome to Pro-Hire{" "}
+      Welcome to Pro-Hire-ziya{" "}
       <span className="text-[#faa302]">{user?.name || "Ziya Academy"}</span>!
     </motion.h2>
 
