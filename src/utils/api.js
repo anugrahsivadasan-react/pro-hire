@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://pro-hire.onrender.com";
 
 export async function parseResume(file) {
   const formData = new FormData();
