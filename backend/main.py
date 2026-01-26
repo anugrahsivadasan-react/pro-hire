@@ -22,7 +22,7 @@ app = FastAPI()
 # Enable CORS for React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # change to frontend URL in production
+    allow_origins=["https://pro-hire-ziya.vercel.app/"],  # change to frontend URL in production
     allow_methods=["*"],
     allow_headers=["*"],
 )
